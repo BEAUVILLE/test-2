@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#061512"/>
+  <title>DIGIY Projet Maison — Test 2 · Créer un module DIGIY</title>
+
+  <style>
+    :root{
+      --bg:#061512;
+      --bg2:#0d2a22;
+      --card:rgba(255,255,255,.075);
+      --card2:rgba(255,255,255,.045);
+      --line:rgba(255,255,255,.14);
+      --text:#f7fff9;
+      --muted:#c7ddd3;
+      --soft:#92b7a8;
+      --gold:#f5c76b;
+      --green:#19c98a;
+      --blue:#5fd4ff;
+      --danger:#ff927a;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),
+        radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),
+        linear-gradient(135deg,var(--bg),#020b09 72%);
+    }
+
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+
+    .wrap{
+      width:min(1180px,100%);
+      margin:0 auto;
+      padding:22px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0 22px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:950;
+      letter-spacing:.02em;
+    }
+
+    .mark{
+      width:44px;
+      height:44px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--gold),#fff1ba);
+      color:#123226;
+      box-shadow:0 12px 30px rgba(245,199,107,.18);
+      flex:0 0 auto;
+      font-weight:1000;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 12px;
+      background:rgba(255,255,255,.055);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      white-space:nowrap;
+      font-weight:850;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      align-items:start;
+      margin-bottom:18px;
+    }
+
+    .card,.panel{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .card{padding:28px}
+    .panel{overflow:hidden}
+
+    .kicker{
+      color:#ffe7a8;
+      font-weight:950;
+      text-transform:uppercase;
+      font-size:13px;
+      letter-spacing:.08em;
+    }
+
+    h1{
+      font-size:clamp(34px,6vw,68px);
+      line-height:.95;
+      margin:12px 0 14px;
+      letter-spacing:-.055em;
+    }
+
+    h2{
+      margin:0 0 14px;
+      font-size:clamp(24px,4vw,38px);
+      letter-spacing:-.035em;
+    }
+
+    h3{
+      margin:0 0 10px;
+      font-size:19px;
+    }
+
+    p{line-height:1.6}
+
+    .lead{
+      color:var(--muted);
+      font-size:17px;
+      margin:0 0 14px;
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--soft);
+      line-height:1.5;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:12px 15px;
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:850;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .btn.primary{
+      background:var(--gold);
+      color:#123226;
+      border-color:rgba(245,199,107,.65);
+      font-weight:950;
+    }
+
+    .btn.green{
+      background:var(--green);
+      color:#06231a;
+      border-color:rgba(25,201,138,.55);
+      font-weight:950;
+    }
+
+    .btn.blue{
+      background:rgba(95,212,255,.16);
+      color:#dff6ff;
+      border-color:rgba(95,212,255,.35);
+    }
+
+    .btn.danger{
+      background:rgba(255,146,122,.12);
+      color:#ffd4cb;
+      border-color:rgba(255,146,122,.28);
+    }
+
+    .hint-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .hint{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px;
+      background:rgba(255,255,255,.045);
+    }
+
+    .hint strong{
+      display:block;
+      color:#ffe7a8;
+      margin-bottom:6px;
+    }
+
+    .hint span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .form{
+      padding:20px;
+      display:grid;
+      gap:13px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field label{
+      font-size:13px;
+      font-weight:900;
+      color:#ffe7a8;
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      border-radius:16px;
+      padding:13px 14px;
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:92px;
+      resize:vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color:rgba(245,199,107,.50);
+      box-shadow:0 0 0 3px rgba(245,199,107,.10);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .row3{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+    }
+
+    .module-zone{
+      border:1px solid rgba(95,212,255,.24);
+      border-radius:24px;
+      padding:16px;
+      background:
+        radial-gradient(circle at top right,rgba(95,212,255,.10),transparent 34%),
+        rgba(255,255,255,.035);
+      display:grid;
+      gap:13px;
+    }
+
+    .module-zone-title{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .module-zone-title strong{
+      color:#dff6ff;
+      font-weight:1000;
+    }
+
+    .module-zone-title span{
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .output-wrap{margin-top:18px}
+
+    .output-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+    }
+
+    .output-tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .output-tabs button{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 11px;
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:850;
+      font-size:13px;
+    }
+
+    .output-tabs button.active{
+      background:var(--gold);
+      color:#123226;
+      border-color:rgba(245,199,107,.7);
+    }
+
+    .output-tabs button.module-tab.active{
+      background:var(--blue);
+      color:#062031;
+      border-color:rgba(95,212,255,.7);
+    }
+
+    .output-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    #output{
+      display:none;
+      margin:0;
+      min-height:380px;
+      max-height:72vh;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+      padding:18px;
+      color:#eefdf6;
+      background:rgba(0,0,0,.22);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .empty{
+      min-height:360px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:25px;
+      color:var(--muted);
+      background:rgba(0,0,0,.18);
+    }
+
+    .statusbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      color:var(--soft);
+      font-size:13px;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%) translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      background:#fff7df;
+      color:#173228;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:950;
+      box-shadow:0 18px 40px rgba(0,0,0,.28);
+      transition:.25s ease;
+      z-index:20;
+      max-width:calc(100% - 28px);
+      text-align:center;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .row,.row3{grid-template-columns:1fr}
+      .hint-grid{grid-template-columns:1fr}
+      .topbar{align-items:flex-start;flex-direction:column}
+      .output-head{flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">∞</div>
+        <div>
+          <div>DIGIY Projet Maison Builder</div>
+          <div class="small">Test 2 · Mode spécial : créer une esquisse de module DIGIY.</div>
+        </div>
+      </div>
+      <a class="pill" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour DIGIYLYFE</a>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <div class="kicker">Atelier module · BY DIGIYLYFE</div>
+        <h1>Créer un module DIGIY.</h1>
+        <p class="lead">
+          Ce test ne cherche pas à produire le module final. Il prépare une <strong>esquisse intelligente</strong> :
+          public, pro, pages, sécurité, prompts par fichier, prototype public et prototype pro.
+        </p>
+        <p class="lead">
+          Doctrine : <strong>Projet Maison dessine le module. DIGIY le sécurise. Le terrain le valide.</strong>
+        </p>
+
+        <div class="actions">
+          <button class="btn primary" type="button" onclick="generateAll()">Créer l’esquisse</button>
+          <button class="btn blue" type="button" onclick="loadLocExample()">Charger exemple LOC</button>
+          <button class="btn danger" type="button" onclick="clearForm()">Nettoyer</button>
+        </div>
+
+        <div class="hint-grid">
+          <div class="hint">
+            <strong>1. Public</strong>
+            <span>La vitrine que le client comprend vite.</span>
+          </div>
+          <div class="hint">
+            <strong>2. Pro</strong>
+            <span>Le coffre métier où le professionnel agit.</span>
+          </div>
+          <div class="hint">
+            <strong>3. Sécurité</strong>
+            <span>PIN, session, routes propres, aucun secret en façade.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <form class="form" onsubmit="event.preventDefault();generateAll();">
+
+          <div class="module-zone">
+            <div class="module-zone-title">
+              <div>
+                <strong>🧩 Mode spécial : Créer un module DIGIY</strong>
+                <div class="small">Pour préparer un module public + pro avant le vrai chantier Supabase / guard / PAY.</div>
+              </div>
+              <span>Test 2</span>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="moduleCode">Code technique du module</label>
+                <input id="moduleCode" value="LOC" placeholder="Ex : LOC, BUILD, JOBS, RESA"/>
+              </div>
+              <div class="field">
+                <label for="modulePublicName">Nom public humain</label>
+                <input id="modulePublicName" value="Je loue" placeholder="Ex : Je loue"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="moduleProName">Nom espace pro</label>
+                <input id="moduleProName" value="Espace propriétaire" placeholder="Ex : Espace propriétaire"/>
+              </div>
+              <div class="field">
+                <label for="moduleTerrain">Terrain / zone</label>
+                <input id="moduleTerrain" value="Saly, Sénégal · Petite Côte" placeholder="Ex : Saly, Mbour, Dakar"/>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="moduleMission">Mission du module</label>
+              <textarea id="moduleMission">Présenter des logements à louer côté public et donner au propriétaire un espace simple pour gérer disponibilités, réservations, prix, notes rapides et fiche publique.</textarea>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="publicAudience">Public client</label>
+                <textarea id="publicAudience">Voyageurs, familles, diaspora, visiteurs de Saly, clients locaux, touristes, personnes qui cherchent un logement clair et direct.</textarea>
+              </div>
+              <div class="field">
+                <label for="proAudience">Public professionnel</label>
+                <textarea id="proAudience">Propriétaires de logements, gestionnaires de chambres, maisons d’hôtes, petites locations et hébergements familiaux.</textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="publicGoal">Objectif face publique</label>
+                <textarea id="publicGoal">Voir les logements, regarder les photos, comprendre les prix, demander une disponibilité et contacter directement le propriétaire par WhatsApp.</textarea>
+              </div>
+              <div class="field">
+                <label for="proGoal">Objectif face pro</label>
+                <textarea id="proGoal">Gérer les réservations, bloquer des dates, modifier les prix, préparer la fiche publique, noter les dépenses et envoyer des traces vers Mon argent.</textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="masterGesture">Geste maître mobile</label>
+                <input id="masterGesture" value="Bloquer une date" placeholder="Ex : Bloquer une date"/>
+              </div>
+              <div class="field">
+                <label for="moneyBridge">Lien Mon argent / PAY</label>
+                <input id="moneyBridge" value="Notes rapides : acompte, ménage, réparation, électricité, recette location → Mon argent" placeholder="Ex : Notes rapides → Mon argent"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="publicPages">Pages publiques attendues</label>
+                <textarea id="publicPages">index.html = galerie publique des logements
+fiche.html = fiche logement
+demande.html = demande disponibilité / WhatsApp
+vision.html = explication simple du module</textarea>
+              </div>
+              <div class="field">
+                <label for="proPages">Pages pro attendues</label>
+                <textarea id="proPages">index.html = entrée propriétaire
+pin.html = accès sécurisé
+dashboard-pro.html = accueil propriétaire
+reservations.html = réservations
+dispos.html = calendrier disponibilités
+notes.html = notes rapides
+profile.html = fiche publique / prix / photos / plus
+guard.js = session privée 8h</textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="publicActions">Actions côté client</label>
+                <textarea id="publicActions">Voir les logements
+Ouvrir une fiche
+Regarder les photos
+Lire prix nuit semaine mois
+Demander disponibilité
+Contacter par WhatsApp
+Comprendre 0% commission
+Payer directement le propriétaire</textarea>
+              </div>
+              <div class="field">
+                <label for="proActions">Actions côté pro</label>
+                <textarea id="proActions">Voir les arrivées du jour
+Bloquer une date
+Ouvrir une date
+Modifier prix
+Noter acompte
+Noter ménage
+Noter réparation
+Envoyer vers Mon argent
+Modifier fiche publique
+Partager QR</textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="securityRules">Sécurité / doctrine public-pro</label>
+              <textarea id="securityRules">Public = vitrine propre.
+Pro = coffre sécurisé.
+Aucun téléphone privé ni slug sensible visible en façade.
+Session PIN 8h.
+Guard par module.
+Slug comme contexte interne.
+Les logements cachés ne sortent pas en galerie publique.
+Le paiement reste direct au propriétaire.
+DIGIY ne garde pas l’argent.
+0% commission.</textarea>
+            </div>
+
+            <div class="field">
+              <label for="sqlNeeds">SQL / RPC à prévoir</label>
+              <textarea id="sqlNeeds">Table logements publics visibles
+Table réservations propriétaire
+Table disponibilités / blocages
+RPC galerie publique
+RPC fiche publique par slug
+RPC vérifier accès pro
+RPC créer demande disponibilité
+RLS stricte côté pro
+Lecture publique seulement pour les logements publiés</textarea>
+            </div>
+
+            <div class="field">
+              <label for="visualStyle">Style visuel souhaité</label>
+              <input id="visualStyle" value="Mobile, premium simple, africain, chaleureux, confiance, photos grandes, boutons clairs"/>
+            </div>
+          </div>
+
+          <button class="btn green" type="submit">Créer l’esquisse du module</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel output-wrap">
+      <div class="output-head">
+        <div class="output-tabs" aria-label="Onglets de sortie">
+          <button type="button" class="active module-tab" data-tab="brief" onclick="setOutputTab('brief')">Brief module</button>
+          <button type="button" class="module-tab" data-tab="map" onclick="setOutputTab('map')">Cartographie</button>
+          <button type="button" class="module-tab" data-tab="prompts" onclick="setOutputTab('prompts')">Prompts fichiers</button>
+          <button type="button" class="module-tab" data-tab="sql" onclick="setOutputTab('sql')">SQL / RPC</button>
+          <button type="button" class="module-tab" data-tab="security" onclick="setOutputTab('security')">Sécurité</button>
+          <button type="button" class="module-tab" data-tab="publicHtml" onclick="setOutputTab('publicHtml')">Prototype public</button>
+          <button type="button" class="module-tab" data-tab="proHtml" onclick="setOutputTab('proHtml')">Prototype pro</button>
+          <button type="button" class="module-tab" data-tab="json" onclick="setOutputTab('json')">JSON</button>
+        </div>
+
+        <div class="output-actions">
+          <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
+          <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
+          <button class="btn" type="button" onclick="previewPublic()">Voir public</button>
+          <button class="btn" type="button" onclick="previewPro()">Voir pro</button>
+        </div>
+      </div>
+
+      <pre id="output" hidden></pre>
+
+      <div id="emptyState" class="empty">
+        <div>
+          <h2>Rien préparé pour l’instant</h2>
+          <p>Clique sur <strong>Créer l’esquisse</strong>. La sortie apparaîtra ici.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="statusbar">
+      <span id="status">Prêt.</span>
+      <span>BY DIGIYLYFE · Projet Maison dessine · DIGIY sécurise · le terrain valide</span>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+
+    const outputs = {
+      brief:"",
+      map:"",
+      prompts:"",
+      sql:"",
+      security:"",
+      publicHtml:"",
+      proHtml:"",
+      json:""
+    };
+
+    let currentTab = "brief";
+    let toastTimer = null;
+
+    const $ = id => document.getElementById(id);
+
+    function esc(value){
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
+
+    function attr(value){
+      return esc(value).replace(/`/g,"&#096;");
+    }
+
+    function slug(value){
+      return String(value || "module")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"")
+        .slice(0,70) || "module";
+    }
+
+    function upper(value){
+      return String(value || "").trim().toUpperCase();
+    }
+
+    function lines(value){
+      return String(value || "")
+        .split(/\n|;/g)
+        .map(x => x.trim())
+        .filter(Boolean);
+    }
+
+    function data(){
+      return {
+        moduleCode:upper($("moduleCode").value || "LOC"),
+        modulePublicName:$("modulePublicName").value.trim() || "Je loue",
+        moduleProName:$("moduleProName").value.trim() || "Espace propriétaire",
+        moduleTerrain:$("moduleTerrain").value.trim() || "Saly, Sénégal",
+        moduleMission:$("moduleMission").value.trim(),
+        publicAudience:$("publicAudience").value.trim(),
+        proAudience:$("proAudience").value.trim(),
+        publicGoal:$("publicGoal").value.trim(),
+        proGoal:$("proGoal").value.trim(),
+        masterGesture:$("masterGesture").value.trim() || "Action principale",
+        moneyBridge:$("moneyBridge").value.trim(),
+        publicPages:lines($("publicPages").value),
+        proPages:lines($("proPages").value),
+        publicActions:lines($("publicActions").value),
+        proActions:lines($("proActions").value),
+        securityRules:lines($("securityRules").value),
+        sqlNeeds:lines($("sqlNeeds").value),
+        visualStyle:$("visualStyle").value.trim()
+      };
+    }
+
+    function moduleSlug(d){
+      return slug("digiy-" + d.moduleCode.toLowerCase() + "-" + d.modulePublicName);
+    }
+
+    function briefModule(d){
+      return [
+        "# BRIEF MODULE DIGIY — " + d.moduleCode,
+        "",
+        "Nom public : " + d.modulePublicName,
+        "Nom espace pro : " + d.moduleProName,
+        "Terrain : " + d.moduleTerrain,
+        "Style : " + d.visualStyle,
+        "",
+        "## Doctrine mère",
+        "Projet Maison dessine le module. DIGIY le sécurise. Le terrain le valide.",
+        "",
+        "## Mission",
+        d.moduleMission || "À préciser.",
+        "",
+        "## Face publique",
+        "- Public visé : " + (d.publicAudience || "À préciser"),
+        "- Objectif : " + (d.publicGoal || "À préciser"),
+        "",
+        "## Face pro",
+        "- Professionnels visés : " + (d.proAudience || "À préciser"),
+        "- Objectif : " + (d.proGoal || "À préciser"),
+        "- Geste maître mobile : " + d.masterGesture,
+        "",
+        "## Argent / Mon argent",
+        d.moneyBridge || "À préciser.",
+        "",
+        "## Valeur DIGIY",
+        "- Présence digitale simple",
+        "- Contact direct",
+        "- 0% commission",
+        "- Paiement direct au professionnel",
+        "- Outils métier simples",
+        "- Protection des informations sensibles",
+        "",
+        "## Nature de cette sortie",
+        "Ceci est une esquisse de module. Ce n’est pas encore le module final branché au backend réel."
+      ].join("\\n");
+    }
+
+    function cartography(d){
+      return [
+        "# CARTOGRAPHIE MODULE — " + d.moduleCode,
+        "",
+        "## Face publique : " + d.modulePublicName,
+        ...(d.publicPages.length ? d.publicPages.map(x => "- " + x) : ["- index.html = vitrine publique", "- fiche.html = fiche publique"]),
+        "",
+        "## Face pro : " + d.moduleProName,
+        ...(d.proPages.length ? d.proPages.map(x => "- " + x) : ["- dashboard-pro.html = accueil pro", "- pin.html = accès sécurisé", "- guard.js = session 8h"]),
+        "",
+        "## Actions côté client",
+        ...(d.publicActions.length ? d.publicActions.map(x => "- " + x) : ["- Comprendre", "- Contacter"]),
+        "",
+        "## Actions côté professionnel",
+        ...(d.proActions.length ? d.proActions.map(x => "- " + x) : ["- Gérer", "- Répondre"]),
+        "",
+        "## Navigation mobile recommandée",
+        "- Accueil",
+        "- Activité principale",
+        "- " + d.masterGesture,
+        "- Notes",
+        "- Plus",
+        "",
+        "## Règle",
+        "La page publique donne envie. La page pro donne le contrôle."
+      ].join("\\n");
+    }
+
+    function promptsByFile(d){
+      const publicPrompt = [
+        "Créer le fichier public index.html pour le module DIGIY " + d.moduleCode + ".",
+        "Nom public : " + d.modulePublicName + ".",
+        "Terrain : " + d.moduleTerrain + ".",
+        "Objectif : " + d.publicGoal,
+        "Style : " + d.visualStyle + ".",
+        "Contraintes : mobile d'abord, contact direct, 0% commission, paiement direct au professionnel, pas de jargon technique, boutons visibles.",
+        "Ne pas afficher d'information privée."
+      ].join(" ");
+
+      const proPrompt = [
+        "Créer le fichier dashboard-pro.html pour le module DIGIY " + d.moduleCode + ".",
+        "Nom espace pro : " + d.moduleProName + ".",
+        "Objectif : " + d.proGoal,
+        "Geste maître : " + d.masterGesture + ".",
+        "Inclure une navigation mobile : Accueil, activité, action principale, notes, plus.",
+        "Ne jamais exposer phone, slug ou token dans l'interface.",
+        "Prévoir session PIN 8h via guard.js."
+      ].join(" ");
+
+      const guardPrompt = [
+        "Créer guard.js pour le module " + d.moduleCode + ".",
+        "Session locale 8h, slug comme contexte interne, téléphone privé gardé localement, nettoyage des URL visibles.",
+        "PIN obligatoire si session absente.",
+        "Ne pas centraliser tous les modules dans un guard unique."
+      ].join(" ");
+
+      return [
+        "# PROMPTS PAR FICHIER — " + d.moduleCode,
+        "",
+        "## index.html public",
+        publicPrompt,
+        "",
+        "## fiche.html public",
+        "Créer une fiche publique détaillée : photos, informations essentielles, prix ou conditions, bouton contact direct, mention 0% commission.",
+        "",
+        "## dashboard-pro.html",
+        proPrompt,
+        "",
+        "## page outil métier",
+        "Créer la page de l'action principale : " + d.masterGesture + ". Elle doit être ultra simple sur téléphone.",
+        "",
+        "## notes.html",
+        "Créer les Notes rapides reliées à Mon argent : le pro écrit une phrase simple, DIGIY prépare la trace.",
+        "",
+        "## profile.html",
+        "Créer la page Plus : fiche publique, photos, prix, QR, support, liens utiles.",
+        "",
+        "## guard.js",
+        guardPrompt
+      ].join("\\n");
+    }
+
+    function sqlRpc(d){
+      return [
+        "-- SQL / RPC CONSEILLÉ — " + d.moduleCode,
+        "-- Ceci est un plan, pas un SQL final à exécuter sans audit.",
+        "",
+        "-- Tables / vues / RPC à prévoir :",
+        ...(d.sqlNeeds.length ? d.sqlNeeds.map(x => "-- - " + x) : ["-- - Table principale", "-- - RPC public", "-- - RPC pro sécurisé"]),
+        "",
+        "-- Doctrine :",
+        "-- Public : lecture seulement des objets publiés.",
+        "-- Pro : écriture protégée par RLS et session valide.",
+        "-- Slug : contexte principal.",
+        "-- Téléphone : donnée privée, jamais affichée en URL.",
+        "-- PAY : push seulement après validation métier.",
+        "",
+        "-- Exemple de noms possibles :",
+        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_public_list()",
+        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_public_detail(p_slug text)",
+        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_pro_summary(p_slug text)",
+        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_create_request(p_payload jsonb)",
+        "",
+        "-- À faire avant production :",
+        "-- 1. vérifier tables réelles",
+        "-- 2. activer RLS",
+        "-- 3. limiter grants anon",
+        "-- 4. tester le parcours public",
+        "-- 5. tester le parcours PIN pro"
+      ].join("\\n");
+    }
+
+    function securityDoc(d){
+      return [
+        "# SÉCURITÉ PUBLIC / PRO — " + d.moduleCode,
+        "",
+        "## Règles déclarées",
+        ...(d.securityRules.length ? d.securityRules.map(x => "- " + x) : ["- À préciser"]),
+        "",
+        "## Doctrine DIGIY",
+        "- Public = vitrine propre.",
+        "- Pro = coffre sécurisé.",
+        "- Aucune donnée sensible dans les URL visibles.",
+        "- PIN 8h côté pro.",
+        "- Guard séparé par module.",
+        "- Slug comme contexte interne.",
+        "- Pas de service_role côté front.",
+        "- Les actions financières vont vers Mon argent, DIGIY ne garde pas les fonds.",
+        "",
+        "## Points à auditer avant ouverture",
+        "- Les liens Site / HUB / Tarifs / Espace pro.",
+        "- Les retours internes.",
+        "- Les formulaires publics.",
+        "- Les grants Supabase.",
+        "- Les RLS.",
+        "- Les RPC publiques.",
+        "- La présence ou non du téléphone dans l’URL.",
+        "- Les pages cachées ou brouillon."
+      ].join("\\n");
+    }
+
+    function publicPrototype(d){
+      const code = esc(d.moduleCode);
+      const name = esc(d.modulePublicName);
+      const terrain = esc(d.moduleTerrain);
+      const goal = esc(d.publicGoal);
+      const actions = d.publicActions.slice(0,6).map(x => `<li>${esc(x)}</li>`).join("");
+
+      return `<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>${name} — DIGIY ${code}</title>
+  <style>
+    :root{--bg:#071512;--line:rgba(255,255,255,.14);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#19c98a}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}
+    .wrap{max-width:1080px;margin:auto;padding:22px}
+    .hero{min-height:82vh;display:grid;align-items:center}
+    .card,.box{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));box-shadow:0 24px 70px rgba(0,0,0,.32);padding:28px}
+    .kicker{color:#ffe7a8;font-weight:900;text-transform:uppercase;font-size:13px}
+    h1{font-size:clamp(42px,8vw,80px);line-height:.9;margin:12px 0;letter-spacing:-.06em}
+    h2{font-size:clamp(28px,5vw,46px);margin:0 0 14px}
+    p,li{color:var(--muted);line-height:1.6}
+    .btn{display:inline-flex;margin-top:14px;border-radius:999px;padding:13px 16px;background:var(--gold);color:#123226;text-decoration:none;font-weight:950}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .section{padding:28px 0}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.hero{min-height:auto;padding-top:40px}.card,.box{padding:22px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="card">
+        <div class="kicker">${terrain} · DIGIY ${code}</div>
+        <h1>${name}</h1>
+        <p>${goal}</p>
+        <p><strong>DIGIY :</strong> contact direct, 0% commission, paiement direct au professionnel.</p>
+        <a class="btn" href="#demande">Faire une demande</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Comprendre vite</h2>
+      <div class="grid">
+        <div class="box"><h3>Voir</h3><p>Le client voit l’offre, les photos, les informations utiles et les conditions.</p></div>
+        <div class="box"><h3>Choisir</h3><p>Le client comprend ce qui est disponible, possible ou à confirmer.</p></div>
+        <div class="box"><h3>Contacter</h3><p>Le contact reste direct avec le professionnel. DIGIY ne prend pas l’argent.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="demande">
+      <h2>Actions client</h2>
+      <div class="box">
+        <ul>${actions || "<li>Contacter directement</li>"}</ul>
+      </div>
+    </section>
+
+    <footer style="padding:30px 0;color:var(--muted);font-size:13px">
+      Prototype public généré par DIGIY Projet Maison · esquisse à finaliser.
+    </footer>
+  </main>
+</body>
+</html>`;
+    }
+
+    function proPrototype(d){
+      const code = esc(d.moduleCode);
+      const proName = esc(d.moduleProName);
+      const mission = esc(d.proGoal);
+      const gesture = esc(d.masterGesture);
+      const actions = d.proActions.slice(0,8).map(x => `<li>${esc(x)}</li>`).join("");
+
+      return `<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>${proName} — DIGIY ${code}</title>
+  <style>
+    :root{--bg:#061b14;--line:rgba(255,255,255,.14);--text:#eafff1;--muted:rgba(234,255,241,.74);--gold:#facc15;--green:#22c55e;--blue:#38bdf8}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top,rgba(250,204,21,.10),transparent 55%),linear-gradient(135deg,var(--bg),#0a2b1f);color:var(--text);padding:16px 16px 104px}
+    .wrap{max-width:1080px;margin:auto}
+    .card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(11,42,31,.94),rgba(6,35,25,.94));box-shadow:0 18px 55px rgba(0,0,0,.45);padding:18px;margin-bottom:14px}
+    h1{margin:0;font-size:clamp(28px,6vw,54px);line-height:1}
+    h2{margin:0 0 12px}
+    p,li{color:var(--muted);line-height:1.55}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    .btn{min-height:58px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.18);color:var(--text);text-decoration:none;font-weight:950;display:grid;place-items:center;text-align:center;padding:10px}
+    .btn.primary{background:linear-gradient(135deg,var(--gold),var(--green));color:#062015;border:none}
+    .bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(6,27,20,.94);border-top:1px solid rgba(255,255,255,.10);padding:8px 10px}
+    .bottom-inner{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .bottom a{min-height:56px;border-radius:16px;display:grid;place-items:center;color:rgba(234,255,241,.70);text-decoration:none;font-size:11px;font-weight:950}
+    .bottom a.active{background:linear-gradient(135deg,var(--gold),var(--green));color:#062015}
+    @media(max-width:760px){.grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <p style="color:#fde68a;font-weight:950;margin:0 0 8px">DIGIY ${code} · Espace pro</p>
+      <h1>${proName}</h1>
+      <p>${mission}</p>
+      <div class="grid">
+        <a class="btn primary" href="#">${gesture}</a>
+        <a class="btn" href="#">Activité</a>
+        <a class="btn" href="#">Notes</a>
+        <a class="btn" href="#">Plus</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Actions terrain</h2>
+      <ul>${actions || "<li>Action principale à préciser</li>"}</ul>
+    </section>
+
+    <section class="card">
+      <h2>Sécurité</h2>
+      <p>Prototype seulement. En production : PIN 8h, guard.js, routes propres, aucun téléphone privé visible, RLS Supabase.</p>
+    </section>
+  </main>
+
+  <nav class="bottom">
+    <div class="bottom-inner">
+      <a class="active" href="#">Accueil</a>
+      <a href="#">Activité</a>
+      <a href="#">Action</a>
+      <a href="#">Notes</a>
+      <a href="#">Plus</a>
+    </div>
+  </nav>
+</body>
+</html>`;
+    }
+
+    function jsonOutput(d){
+      return JSON.stringify({
+        mode:"create_digiy_module",
+        doctrine:"Projet Maison dessine le module. DIGIY le sécurise. Le terrain le valide.",
+        module:d,
+        generated:{
+          brief:true,
+          map:true,
+          prompts:true,
+          sql:true,
+          security:true,
+          publicPrototype:true,
+          proPrototype:true
+        }
+      }, null, 2);
+    }
+
+    function generateAll(){
+      const d = data();
+
+      outputs.brief = briefModule(d);
+      outputs.map = cartography(d);
+      outputs.prompts = promptsByFile(d);
+      outputs.sql = sqlRpc(d);
+      outputs.security = securityDoc(d);
+      outputs.publicHtml = publicPrototype(d);
+      outputs.proHtml = proPrototype(d);
+      outputs.json = jsonOutput(d);
+
+      currentTab = "brief";
+
+      document.querySelectorAll(".output-tabs button").forEach(b => {
+        b.classList.toggle("active", b.dataset.tab === currentTab);
+      });
+
+      renderOutput();
+      setStatus("Esquisse module préparée pour : " + d.moduleCode + " · " + d.modulePublicName);
+      toast("Module esquissé");
+    }
+
+    function setOutputTab(tab){
+      currentTab = tab;
+      document.querySelectorAll(".output-tabs button").forEach(b => {
+        b.classList.toggle("active", b.dataset.tab === tab);
+      });
+      renderOutput();
+    }
+
+    function renderOutput(){
+      const text = outputs[currentTab] || "";
+      const out = $("output");
+      const empty = $("emptyState");
+
+      if(!text.trim()){
+        out.hidden = true;
+        out.style.display = "none";
+        empty.hidden = false;
+        empty.style.display = "grid";
+        return;
+      }
+
+      empty.hidden = true;
+      empty.style.display = "none";
+      out.hidden = false;
+      out.style.display = "block";
+      out.textContent = text;
+    }
+
+    async function copyCurrent(){
+      const text = outputs[currentTab] || "";
+      if(!text.trim()){
+        toast("Rien à copier");
+        return;
+      }
+
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(_){
+        const area = document.createElement("textarea");
+        area.value = text;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+
+      toast("Sortie copiée");
+    }
+
+    function downloadCurrent(){
+      const text = outputs[currentTab] || "";
+      if(!text.trim()){
+        toast("Rien à télécharger");
+        return;
+      }
+
+      const d = data();
+      const ext =
+        currentTab === "json" ? "json" :
+        currentTab === "publicHtml" || currentTab === "proHtml" ? "html" :
+        currentTab === "sql" ? "sql" :
+        "md";
+
+      const blob = new Blob([text],{type:"text/plain;charset=utf-8"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = moduleSlugName(d) + "_" + currentTab + "." + ext;
+      document.body.appendChild(a);
+      a.click();
+      URL.revokeObjectURL(a.href);
+      a.remove();
+
+      toast("Téléchargement lancé");
+    }
+
+    function moduleSlugName(d){
+      return slug(d.moduleCode + "-" + d.modulePublicName);
+    }
+
+    function previewHtml(html){
+      if(!html.trim()){
+        toast("Prépare d’abord le module");
+        return;
+      }
+
+      const blob = new Blob([html],{type:"text/html;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      window.open(url,"_blank");
+      setTimeout(() => URL.revokeObjectURL(url),60000);
+    }
+
+    function previewPublic(){
+      previewHtml(outputs.publicHtml || "");
+    }
+
+    function previewPro(){
+      previewHtml(outputs.proHtml || "");
+    }
+
+    function setStatus(text){
+      $("status").textContent = text;
+    }
+
+    function toast(text){
+      const el = $("toast");
+      el.textContent = text;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"),1800);
+    }
+
+    function clearForm(){
+      [
+        "moduleCode","modulePublicName","moduleProName","moduleTerrain","moduleMission",
+        "publicAudience","proAudience","publicGoal","proGoal","masterGesture",
+        "moneyBridge","publicPages","proPages","publicActions","proActions",
+        "securityRules","sqlNeeds","visualStyle"
+      ].forEach(id => {
+        const el = $(id);
+        if(el) el.value = "";
+      });
+
+      Object.keys(outputs).forEach(k => outputs[k] = "");
+      renderOutput();
+      setStatus("Formulaire nettoyé.");
+      toast("Nettoyé");
+    }
+
+    function loadLocExample(){
+      $("moduleCode").value = "LOC";
+      $("modulePublicName").value = "Je loue";
+      $("moduleProName").value = "Espace propriétaire";
+      $("moduleTerrain").value = "Saly, Sénégal · Petite Côte";
+      $("moduleMission").value = "Présenter des logements à louer côté public et donner au propriétaire un espace simple pour gérer disponibilités, réservations, prix, notes rapides et fiche publique.";
+      $("publicAudience").value = "Voyageurs, familles, diaspora, visiteurs de Saly, clients locaux, touristes, personnes qui cherchent un logement clair et direct.";
+      $("proAudience").value = "Propriétaires de logements, gestionnaires de chambres, maisons d’hôtes, petites locations et hébergements familiaux.";
+      $("publicGoal").value = "Voir les logements, regarder les photos, comprendre les prix, demander une disponibilité et contacter directement le propriétaire par WhatsApp.";
+      $("proGoal").value = "Gérer les réservations, bloquer des dates, modifier les prix, préparer la fiche publique, noter les dépenses et envoyer des traces vers Mon argent.";
+      $("masterGesture").value = "Bloquer une date";
+      $("moneyBridge").value = "Notes rapides : acompte, ménage, réparation, électricité, recette location → Mon argent";
+      $("publicPages").value = "index.html = galerie publique des logements\\nfiche.html = fiche logement\\ndemande.html = demande disponibilité / WhatsApp\\nvision.html = explication simple du module";
+      $("proPages").value = "index.html = entrée propriétaire\\npin.html = accès sécurisé\\ndashboard-pro.html = accueil propriétaire\\nreservations.html = réservations\\ndispos.html = calendrier disponibilités\\nnotes.html = notes rapides\\nprofile.html = fiche publique / prix / photos / plus\\nguard.js = session privée 8h";
+      $("publicActions").value = "Voir les logements\\nOuvrir une fiche\\nRegarder les photos\\nLire prix nuit semaine mois\\nDemander disponibilité\\nContacter par WhatsApp\\nComprendre 0% commission\\nPayer directement le propriétaire";
+      $("proActions").value = "Voir les arrivées du jour\\nBloquer une date\\nOuvrir une date\\nModifier prix\\nNoter acompte\\nNoter ménage\\nNoter réparation\\nEnvoyer vers Mon argent\\nModifier fiche publique\\nPartager QR";
+      $("securityRules").value = "Public = vitrine propre.\\nPro = coffre sécurisé.\\nAucun téléphone privé ni slug sensible visible en façade.\\nSession PIN 8h.\\nGuard par module.\\nSlug comme contexte interne.\\nLes logements cachés ne sortent pas en galerie publique.\\nLe paiement reste direct au propriétaire.\\nDIGIY ne garde pas l’argent.\\n0% commission.";
+      $("sqlNeeds").value = "Table logements publics visibles\\nTable réservations propriétaire\\nTable disponibilités / blocages\\nRPC galerie publique\\nRPC fiche publique par slug\\nRPC vérifier accès pro\\nRPC créer demande disponibilité\\nRLS stricte côté pro\\nLecture publique seulement pour les logements publiés";
+      $("visualStyle").value = "Mobile, premium simple, africain, chaleureux, confiance, photos grandes, boutons clairs";
+
+      setStatus("Exemple LOC chargé.");
+      toast("LOC chargé");
+    }
+
+    window.generateAll = generateAll;
+    window.setOutputTab = setOutputTab;
+    window.copyCurrent = copyCurrent;
+    window.downloadCurrent = downloadCurrent;
+    window.previewPublic = previewPublic;
+    window.previewPro = previewPro;
+    window.clearForm = clearForm;
+    window.loadLocExample = loadLocExample;
+
+    renderOutput();
+  </script>
+</body>
+</html>
