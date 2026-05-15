@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="theme-color" content="#061512"/>
-  <title>DIGIY Projet Maison — Test 2 · Créer un module DIGIY</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIGIY Projet Maison Builder — V19 POS document verrouillé</title>
 
   <style>
     :root{
@@ -18,24 +17,22 @@
       --soft:#92b7a8;
       --gold:#f5c76b;
       --green:#19c98a;
-      --blue:#5fd4ff;
       --danger:#ff927a;
+      --blue:#5fd4ff;
       --shadow:0 24px 70px rgba(0,0,0,.34);
       --radius:28px;
     }
 
     *{box-sizing:border-box}
-
     html{scroll-behavior:smooth}
-
     body{
       margin:0;
-      color:var(--text);
       font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:
         radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),
         radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),
         linear-gradient(135deg,var(--bg),#020b09 72%);
+      color:var(--text);
     }
 
     a{color:inherit}
@@ -65,8 +62,8 @@
     }
 
     .mark{
-      width:44px;
-      height:44px;
+      width:42px;
+      height:42px;
       border-radius:16px;
       display:grid;
       place-items:center;
@@ -74,7 +71,6 @@
       color:#123226;
       box-shadow:0 12px 30px rgba(245,199,107,.18);
       flex:0 0 auto;
-      font-weight:1000;
     }
 
     .pill{
@@ -89,14 +85,13 @@
       font-size:13px;
       text-decoration:none;
       white-space:nowrap;
-      font-weight:850;
     }
 
     .hero{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1.05fr .95fr;
       gap:18px;
-      align-items:start;
+      align-items:stretch;
       margin-bottom:18px;
     }
 
@@ -175,14 +170,12 @@
       background:var(--gold);
       color:#123226;
       border-color:rgba(245,199,107,.65);
-      font-weight:950;
     }
 
     .btn.green{
       background:var(--green);
       color:#06231a;
       border-color:rgba(25,201,138,.55);
-      font-weight:950;
     }
 
     .btn.blue{
@@ -195,33 +188,6 @@
       background:rgba(255,146,122,.12);
       color:#ffd4cb;
       border-color:rgba(255,146,122,.28);
-    }
-
-    .hint-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:18px;
-    }
-
-    .hint{
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:14px;
-      background:rgba(255,255,255,.045);
-    }
-
-    .hint strong{
-      display:block;
-      color:#ffe7a8;
-      margin-bottom:6px;
-    }
-
-    .hint span{
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
     }
 
     .form{
@@ -254,7 +220,7 @@
     }
 
     .field textarea{
-      min-height:92px;
+      min-height:96px;
       resize:vertical;
     }
 
@@ -277,31 +243,30 @@
       gap:12px;
     }
 
-    .module-zone{
-      border:1px solid rgba(95,212,255,.24);
+    .quote-zone{
+      border:1px solid rgba(95,212,255,.22);
       border-radius:24px;
       padding:16px;
       background:
         radial-gradient(circle at top right,rgba(95,212,255,.10),transparent 34%),
         rgba(255,255,255,.035);
-      display:grid;
-      gap:13px;
     }
 
-    .module-zone-title{
+    .quote-zone .quote-title{
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
+      margin-bottom:10px;
     }
 
-    .module-zone-title strong{
+    .quote-zone .quote-title strong{
       color:#dff6ff;
-      font-weight:1000;
+      font-weight:950;
     }
 
-    .module-zone-title span{
+    .quote-zone .quote-title span{
       color:var(--soft);
       font-size:13px;
       line-height:1.45;
@@ -312,7 +277,7 @@
     .output-head{
       display:flex;
       justify-content:space-between;
-      align-items:flex-start;
+      align-items:center;
       gap:12px;
       padding:16px;
       border-bottom:1px solid var(--line);
@@ -341,7 +306,7 @@
       border-color:rgba(245,199,107,.7);
     }
 
-    .output-tabs button.module-tab.active{
+    .output-tabs button.devis-tab.active{
       background:var(--blue);
       color:#062031;
       border-color:rgba(95,212,255,.7);
@@ -356,8 +321,8 @@
     #output{
       display:none;
       margin:0;
-      min-height:380px;
-      max-height:72vh;
+      min-height:360px;
+      max-height:70vh;
       overflow:auto;
       white-space:pre-wrap;
       word-break:break-word;
@@ -370,7 +335,7 @@
     }
 
     .empty{
-      min-height:360px;
+      min-height:340px;
       display:grid;
       place-items:center;
       text-align:center;
@@ -413,12 +378,39 @@
       transform:translateX(-50%) translateY(0);
     }
 
-    @media(max-width:980px){
+    .hint-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .hint{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px;
+      background:rgba(255,255,255,.045);
+    }
+
+    .hint strong{
+      display:block;
+      color:#ffe7a8;
+      margin-bottom:6px;
+    }
+
+    .hint span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    @media(max-width:900px){
       .hero{grid-template-columns:1fr}
       .row,.row3{grid-template-columns:1fr}
       .hint-grid{grid-template-columns:1fr}
       .topbar{align-items:flex-start;flex-direction:column}
-      .output-head{flex-direction:column}
+      .output-head{align-items:flex-start;flex-direction:column}
     }
   </style>
 </head>
@@ -430,7 +422,7 @@
         <div class="mark">∞</div>
         <div>
           <div>DIGIY Projet Maison Builder</div>
-          <div class="small">Test 2 · Mode spécial : créer une esquisse de module DIGIY.</div>
+          <div class="small">Préparer une page, un brief, un prompt, une base de réalisation et un pré-devis artisan.</div>
         </div>
       </div>
       <a class="pill" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour DIGIYLYFE</a>
@@ -438,192 +430,315 @@
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Atelier module · BY DIGIYLYFE</div>
-        <h1>Créer un module DIGIY.</h1>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V19</div>
+        <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">
-          Ce test ne cherche pas à produire le module final. Il prépare une <strong>esquisse intelligente</strong> :
-          public, pro, pages, sécurité, prompts par fichier, prototype public et prototype pro.
+          Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
+          brief, prompt IA, mémo SQL léger, plan de réalisation, <strong>pré-devis artisan</strong>, cahier logiciel POS, prompt de recouture, page HTML et JSON.
         </p>
         <p class="lead">
-          Doctrine : <strong>Projet Maison dessine le module. DIGIY le sécurise. Le terrain le valide.</strong>
+          Version V18 : en mode POS, Document logiciel devient un vrai document logiciel. Plus de fausse vitrine, plus de texte générique :
+          <strong>Le pro parle métier. DIGIY prépare. Le pro valide. La caisse exécute.</strong>
         </p>
+        <p class="lead"><strong>Chaque partenaire est une facette. DIGIY lui donne la lumière.</strong></p>
 
         <div class="actions">
-          <button class="btn primary" type="button" onclick="generateAll()">Créer l’esquisse</button>
-          <button class="btn blue" type="button" onclick="loadLocExample()">Charger exemple LOC</button>
+          <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
+          <button class="btn blue" type="button" onclick="setServiceQuoteExample()">Exemple devis artisan</button>
+          <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
           <button class="btn danger" type="button" onclick="clearForm()">Nettoyer</button>
         </div>
 
         <div class="hint-grid">
-          <div class="hint">
-            <strong>1. Public</strong>
-            <span>La vitrine que le client comprend vite.</span>
-          </div>
-          <div class="hint">
-            <strong>2. Pro</strong>
-            <span>Le coffre métier où le professionnel agit.</span>
-          </div>
-          <div class="hint">
-            <strong>3. Sécurité</strong>
-            <span>PIN, session, routes propres, aucun secret en façade.</span>
-          </div>
+          <div class="hint"><strong>1. Projet</strong><span>Nom, ville, type et public visé.</span></div>
+          <div class="hint"><strong>2. Contact</strong><span>WhatsApp, horaires et repère terrain.</span></div>
+          <div class="hint"><strong>3. Pré-devis</strong><span>Base claire à faire valider par l’artisan.</span></div>
         </div>
       </div>
 
       <div class="panel">
         <form class="form" onsubmit="event.preventDefault();generateAll();">
-
-          <div class="module-zone">
-            <div class="module-zone-title">
-              <div>
-                <strong>🧩 Mode spécial : Créer un module DIGIY</strong>
-                <div class="small">Pour préparer un module public + pro avant le vrai chantier Supabase / guard / PAY.</div>
-              </div>
-              <span>Test 2</span>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="moduleCode">Code technique du module</label>
-                <input id="moduleCode" value="LOC" placeholder="Ex : LOC, BUILD, JOBS, RESA"/>
-              </div>
-              <div class="field">
-                <label for="modulePublicName">Nom public humain</label>
-                <input id="modulePublicName" value="Je loue" placeholder="Ex : Je loue"/>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="moduleProName">Nom espace pro</label>
-                <input id="moduleProName" value="Espace propriétaire" placeholder="Ex : Espace propriétaire"/>
-              </div>
-              <div class="field">
-                <label for="moduleTerrain">Terrain / zone</label>
-                <input id="moduleTerrain" value="Saly, Sénégal · Petite Côte" placeholder="Ex : Saly, Mbour, Dakar"/>
-              </div>
-            </div>
-
+          <div class="row">
             <div class="field">
-              <label for="moduleMission">Mission du module</label>
-              <textarea id="moduleMission">Présenter des logements à louer côté public et donner au propriétaire un espace simple pour gérer disponibilités, réservations, prix, notes rapides et fiche publique.</textarea>
+              <label for="projectName">Nom du projet</label>
+              <input id="projectName" value="POS Boutique Linge & Style" placeholder="Ex : POS Boutique Linge & Style" />
             </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="publicAudience">Public client</label>
-                <textarea id="publicAudience">Voyageurs, familles, diaspora, visiteurs de Saly, clients locaux, touristes, personnes qui cherchent un logement clair et direct.</textarea>
-              </div>
-              <div class="field">
-                <label for="proAudience">Public professionnel</label>
-                <textarea id="proAudience">Propriétaires de logements, gestionnaires de chambres, maisons d’hôtes, petites locations et hébergements familiaux.</textarea>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="publicGoal">Objectif face publique</label>
-                <textarea id="publicGoal">Voir les logements, regarder les photos, comprendre les prix, demander une disponibilité et contacter directement le propriétaire par WhatsApp.</textarea>
-              </div>
-              <div class="field">
-                <label for="proGoal">Objectif face pro</label>
-                <textarea id="proGoal">Gérer les réservations, bloquer des dates, modifier les prix, préparer la fiche publique, noter les dépenses et envoyer des traces vers Mon argent.</textarea>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="masterGesture">Geste maître mobile</label>
-                <input id="masterGesture" value="Bloquer une date" placeholder="Ex : Bloquer une date"/>
-              </div>
-              <div class="field">
-                <label for="moneyBridge">Lien Mon argent / PAY</label>
-                <input id="moneyBridge" value="Notes rapides : acompte, ménage, réparation, électricité, recette location → Mon argent" placeholder="Ex : Notes rapides → Mon argent"/>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="publicPages">Pages publiques attendues</label>
-                <textarea id="publicPages">index.html = galerie publique des logements
-fiche.html = fiche logement
-demande.html = demande disponibilité / WhatsApp
-vision.html = explication simple du module</textarea>
-              </div>
-              <div class="field">
-                <label for="proPages">Pages pro attendues</label>
-                <textarea id="proPages">index.html = entrée propriétaire
-pin.html = accès sécurisé
-dashboard-pro.html = accueil propriétaire
-reservations.html = réservations
-dispos.html = calendrier disponibilités
-notes.html = notes rapides
-profile.html = fiche publique / prix / photos / plus
-guard.js = session privée 8h</textarea>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="field">
-                <label for="publicActions">Actions côté client</label>
-                <textarea id="publicActions">Voir les logements
-Ouvrir une fiche
-Regarder les photos
-Lire prix nuit semaine mois
-Demander disponibilité
-Contacter par WhatsApp
-Comprendre 0% commission
-Payer directement le propriétaire</textarea>
-              </div>
-              <div class="field">
-                <label for="proActions">Actions côté pro</label>
-                <textarea id="proActions">Voir les arrivées du jour
-Bloquer une date
-Ouvrir une date
-Modifier prix
-Noter acompte
-Noter ménage
-Noter réparation
-Envoyer vers Mon argent
-Modifier fiche publique
-Partager QR</textarea>
-              </div>
-            </div>
-
             <div class="field">
-              <label for="securityRules">Sécurité / doctrine public-pro</label>
-              <textarea id="securityRules">Public = vitrine propre.
-Pro = coffre sécurisé.
-Aucun téléphone privé ni slug sensible visible en façade.
-Session PIN 8h.
-Guard par module.
-Slug comme contexte interne.
-Les logements cachés ne sortent pas en galerie publique.
-Le paiement reste direct au propriétaire.
-DIGIY ne garde pas l’argent.
-0% commission.</textarea>
-            </div>
-
-            <div class="field">
-              <label for="sqlNeeds">SQL / RPC à prévoir</label>
-              <textarea id="sqlNeeds">Table logements publics visibles
-Table réservations propriétaire
-Table disponibilités / blocages
-RPC galerie publique
-RPC fiche publique par slug
-RPC vérifier accès pro
-RPC créer demande disponibilité
-RLS stricte côté pro
-Lecture publique seulement pour les logements publiés</textarea>
-            </div>
-
-            <div class="field">
-              <label for="visualStyle">Style visuel souhaité</label>
-              <input id="visualStyle" value="Mobile, premium simple, africain, chaleureux, confiance, photos grandes, boutons clairs"/>
+              <label for="typeKey">Type</label>
+              <select id="typeKey" onchange="applyTypeDefaults(false)">
+                <option value="restaurant">Restaurant</option>
+                <option value="hotel">Logement / hôtel</option>
+                <option value="boutique">Boutique</option>
+                <option value="pos" selected>Commerce / POS écoute métier</option>
+                <option value="service">Service / artisan</option>
+                <option value="event">Événement</option>
+                <option value="generic">Projet simple</option>
+              </select>
             </div>
           </div>
 
-          <button class="btn green" type="submit">Créer l’esquisse du module</button>
+          <div class="row">
+            <div class="field">
+              <label for="city">Ville / zone</label>
+              <input id="city" value="Saly, Sénégal" placeholder="Ex : Saly, Sénégal" />
+            </div>
+            <div class="field">
+              <label for="style">Style souhaité</label>
+              <input id="style" value="Caisse textile simple, mobile, gros boutons, marchandises, tailles, couleurs, écoute métier" placeholder="Ex : sobre, moderne, local" />
+            </div>
+          </div>
+
+          <div class="row3">
+            <div class="field">
+              <label for="contactPhone">WhatsApp officiel</label>
+              <input id="contactPhone" value="+221 77 000 00 00" placeholder="Ex : +221 77 000 00 00" />
+            </div>
+            <div class="field">
+              <label for="hours">Horaires</label>
+              <input id="hours" value="Tous les jours · horaires boutique" placeholder="Ex : Tous les jours 11h — 23h" />
+            </div>
+            <div class="field">
+              <label for="address">Repère / adresse</label>
+              <input id="address" value="Comptoir boutique textile · zone à préciser" placeholder="Ex : Saly centre, près de..." />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="activity">Activité</label>
+            <textarea id="activity" placeholder="Décris l’activité">Logiciel de caisse POS pour boutique de linge de maison, robes stylées, tenues, foutas, draps, serviettes, parures de lit et marchandises textiles. La caisse aide à vendre vite, suivre les prix, gérer les stocks, noter les tailles, couleurs, commandes clientes, dettes, remises et garder les ventes propres.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="goal">Objectif de la page</label>
+            <textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Dégrossir un logiciel POS adapté au commerce textile : former le pro avec des phrases simples, former la caisse avec des règles métier, préparer les actions puis laisser le pro valider avant exécution.</textarea>
+            <div class="small">Photos gardées sur Google Drive ou média WordPress : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div>
+          </div>
+
+          <div class="field">
+            <label for="audience">Public visé</label>
+            <input id="audience" value="Boutiques de linge de maison, vendeuses de robes, commerces textile, boutiques de plage, hôtels, villas, familles, clientes locales et visiteurs" placeholder="Ex : clients locaux, touristes, familles" />
+          </div>
+
+          <div class="field">
+            <label for="specialFeatures">Points importants</label>
+            <textarea id="specialFeatures" placeholder="Un point par ligne">Marchandises propres
+Prix visibles
+Stock par modèle
+Couleurs et tailles
+Panier rapide
+Addition claire
+Remise possible
+Commande cliente
+Dette client
+Encaisser
+Stats locales
+Ticket au choix
+Oreille métier
+Validation avant action</textarea>
+          </div>
+
+          <div class="field">
+            <label for="extraSections">Sections à ajouter</label>
+            <textarea id="extraSections" placeholder="Un nom de section par ligne">Caisse
+Marchandises
+Stock
+Couleurs
+Tailles
+Oreille métier
+Panier
+Addition
+Paiement
+Notes clientes
+Stats
+Ticket
+Entraînement</textarea>
+          </div>
+
+
+          <div class="quote-zone">
+            <div class="quote-title">
+              <strong>🎙️ POS écoute métier</strong>
+              <span>On forme deux choses : le langage du pro et le langage de la caisse.</span>
+            </div>
+
+            <div class="field">
+              <label for="posProducts">Articles prioritaires — un par ligne</label>
+              <textarea id="posProducts" placeholder="Ex :
+Pain | 250
+Café | 1000
+Dentifrice | 1200
+Savon | 500">Drap 2 places | 15000
+Drap 1 place | 9000
+Serviette bain | 5000
+Serviette plage | 7000
+Fouta | 8000
+Robe stylée | 18000
+Robe plage | 12000
+Tenue femme | 25000
+Parure lit | 22000
+Coussin déco | 6000
+Nappe maison | 10000
+Crème beauté | 3500</textarea>
+              <div class="small">Conseil : commence par 10 articles forts. La caisse reconnaît d’abord le comptoir réel.</div>
+            </div>
+
+            <div class="field">
+              <label for="posActions">Actions métier POS — une par ligne</label>
+              <textarea id="posActions" placeholder="Ex :
+Vendre
+Ajouter du stock
+Corriger quantité
+Faire remise
+Noter dette client
+Encaisser
+Voir stats
+Ticket au choix">Vendre
+Ajouter au panier
+Ajouter du stock
+Changer quantité
+Changer prix
+Faire remise
+Noter taille
+Noter couleur
+Noter commande cliente
+Noter dette client
+Encaisser
+Voir stats
+Ticket au choix
+Nouvelle vente</textarea>
+            </div>
+
+            <div class="field">
+              <label for="posPhrases">Phrases officielles d’entraînement — une par ligne</label>
+              <textarea id="posPhrases" placeholder="Ex :
+dentifrice 2 à 1200
+2 pains à 250
+café
+ajoute 12 savons à 500
+Awa doit 2500 fin du mois
+va aux stats">robe stylée 1 à 18000
+2 serviettes bain à 5000
+drap 2 places 1 à 15000
+fouta 3 à 8000
+parure lit 1 à 22000
+ajoute 12 serviettes bain à 5000
+Awa doit 10000 pour robe stylée
+note couleur bleue taille M
+va aux stats
+ouvre les marchandises
+nouvelle vente</textarea>
+            </div>
+
+            <div class="field">
+              <label for="posAliases">Corrections micro / synonymes — une par ligne</label>
+              <textarea id="posAliases" placeholder="Ex :
+pin = pain
+pins = pains
+deux = 2
+dentifrices = dentifrice
+cafe = café">article = marchandise
+articles = marchandises
+serviettes = serviette
+robes = robe
+draps = drap
+foutas = fouta
+parures = parure
+deux = 2
+trois = 3
+quatre = 4
+bleu = bleue
+taille moyenne = taille M
+stat = stats
+statistique = stats</textarea>
+            </div>
+
+            <div class="field">
+              <label for="posWorkflow">Parcours action POS</label>
+              <textarea id="posWorkflow" placeholder="Ex : le pro parle ou clique, DIGIY prépare un brouillon, le pro valide, la caisse ajoute au panier, l’addition s’ouvre, puis Encaisser enregistre les stats.">Le pro parle ou clique. DIGIY prépare un brouillon. Le pro valide. La caisse ajoute la marchandise au panier. L’addition s’ouvre. Le pro confirme. Le paiement est choisi. Encaisser enregistre les stats. Le ticket reste au choix si la cliente le demande.</textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="galleryPhotos">Galerie photos — titre | URL publique</label>
+            <textarea id="galleryPhotos" style="min-height:150px" placeholder="Une photo par ligne :
+Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing
+Salle | https://digiylyfe.net/wp-content/uploads/2026/04/photo.jpg">Comptoir textile |
+Marchandises |
+Robes stylées |
+Linge de maison |</textarea>
+            <div class="small"><strong>Important :</strong> Titre | URL, ou URLs seules. Les photos restent dehors : Supabase ne reçoit rien.</div>
+          </div>
+
+          <div class="quote-zone">
+            <div class="quote-title">
+              <strong>🧾 Pré-devis artisan</strong>
+              <span>Base claire à valider par l’artisan après vérification du terrain.</span>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="quoteClient">Client / demandeur</label>
+                <input id="quoteClient" placeholder="Ex : Mme Diop" />
+              </div>
+              <div class="field">
+                <label for="quoteWorkType">Type d’intervention</label>
+                <input id="quoteWorkType" placeholder="Ex : Pose carrelage terrasse" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="quoteMeasure">Surface / quantité / volume</label>
+                <input id="quoteMeasure" placeholder="Ex : 25 m², 3 chambres, 1 salle de bain" />
+              </div>
+              <div class="field">
+                <label for="quoteDelay">Délai estimé</label>
+                <input id="quoteDelay" placeholder="Ex : 2 à 3 jours après validation" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="quoteMaterials">Matériaux / fournitures prévues</label>
+              <textarea id="quoteMaterials" placeholder="Ex : colle, carreaux, ciment, sable, joints, transport matériel"></textarea>
+            </div>
+
+            <div class="row3">
+              <div class="field">
+                <label for="quoteLabor">Main-d’œuvre estimée (FCFA)</label>
+                <input id="quoteLabor" inputmode="numeric" placeholder="Ex : 75000" />
+              </div>
+              <div class="field">
+                <label for="quoteMaterialCost">Matériaux estimés (FCFA)</label>
+                <input id="quoteMaterialCost" inputmode="numeric" placeholder="Ex : 120000" />
+              </div>
+              <div class="field">
+                <label for="quoteTravel">Déplacement / transport (FCFA)</label>
+                <input id="quoteTravel" inputmode="numeric" placeholder="Ex : 10000" />
+              </div>
+            </div>
+
+            <div class="row3">
+              <div class="field">
+                <label for="quoteOther">Marge / imprévus (FCFA)</label>
+                <input id="quoteOther" inputmode="numeric" placeholder="Ex : 15000" />
+              </div>
+              <div class="field">
+                <label for="quoteDeposit">Acompte conseillé</label>
+                <input id="quoteDeposit" placeholder="Ex : 50% à la commande" />
+              </div>
+              <div class="field">
+                <label for="quoteValidity">Validité du devis</label>
+                <input id="quoteValidity" value="7 jours" placeholder="Ex : 7 jours" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="quoteNotes">Notes artisan / conditions</label>
+              <textarea id="quoteNotes" placeholder="Ex : prix à confirmer après visite, matériaux selon disponibilité, finition à préciser"></textarea>
+            </div>
+          </div>
+
+          <button class="btn green" type="submit">Préparer le projet</button>
         </form>
       </div>
     </section>
@@ -631,37 +746,35 @@ Lecture publique seulement pour les logements publiés</textarea>
     <section class="panel output-wrap">
       <div class="output-head">
         <div class="output-tabs" aria-label="Onglets de sortie">
-          <button type="button" class="active module-tab" data-tab="brief" onclick="setOutputTab('brief')">Brief module</button>
-          <button type="button" class="module-tab" data-tab="map" onclick="setOutputTab('map')">Cartographie</button>
-          <button type="button" class="module-tab" data-tab="prompts" onclick="setOutputTab('prompts')">Prompts fichiers</button>
-          <button type="button" class="module-tab" data-tab="sql" onclick="setOutputTab('sql')">SQL / RPC</button>
-          <button type="button" class="module-tab" data-tab="security" onclick="setOutputTab('security')">Sécurité</button>
-          <button type="button" class="module-tab" data-tab="publicHtml" onclick="setOutputTab('publicHtml')">Prototype public</button>
-          <button type="button" class="module-tab" data-tab="proHtml" onclick="setOutputTab('proHtml')">Prototype pro</button>
-          <button type="button" class="module-tab" data-tab="json" onclick="setOutputTab('json')">JSON</button>
+          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Brief</button>
+          <button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button>
+          <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
+          <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
+          <button type="button" class="devis-tab" data-tab="devis" onclick="setOutputTab('devis')">Pré-devis artisan</button>
+          <button type="button" data-tab="pos" onclick="setOutputTab('pos')">Cahier logiciel POS</button>
+          <button type="button" data-tab="codepos" onclick="setOutputTab('codepos')">Prompt recouture POS</button>
+          <button type="button" data-tab="page" onclick="setOutputTab('page')">Document logiciel POS</button>
+          <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
-
         <div class="output-actions">
           <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
           <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
-          <button class="btn" type="button" onclick="previewPublic()">Voir public</button>
-          <button class="btn" type="button" onclick="previewPro()">Voir pro</button>
+          <button class="btn" type="button" onclick="previewPage()">Prévisualiser le document POS</button>
         </div>
       </div>
 
       <pre id="output" hidden></pre>
-
       <div id="emptyState" class="empty">
         <div>
           <h2>Rien préparé pour l’instant</h2>
-          <p>Clique sur <strong>Créer l’esquisse</strong>. La sortie apparaîtra ici.</p>
+          <p>Clique sur <strong>Préparer le projet</strong>. La sortie apparaîtra ici.</p>
         </div>
       </div>
     </section>
 
     <div class="statusbar">
       <span id="status">Prêt.</span>
-      <span>BY DIGIYLYFE · Projet Maison dessine · DIGIY sécurise · le terrain valide</span>
+      <span>BY DIGIYLYFE · terrain d’abord</span>
     </div>
   </main>
 
@@ -672,18 +785,18 @@ Lecture publique seulement pour les logements publiés</textarea>
 
     const outputs = {
       brief:"",
-      map:"",
-      prompts:"",
+      prompt:"",
       sql:"",
-      security:"",
-      publicHtml:"",
-      proHtml:"",
+      realisation:"",
+      devis:"",
+      pos:"",
+      codepos:"",
+      page:"",
       json:""
     };
 
     let currentTab = "brief";
     let toastTimer = null;
-
     const $ = id => document.getElementById(id);
 
     function esc(value){
@@ -699,415 +812,1186 @@ Lecture publique seulement pour les logements publiés</textarea>
       return esc(value).replace(/`/g,"&#096;");
     }
 
+    function js(value){
+      return String(value ?? "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/\n/g,"\\n")
+        .replace(/\r/g,"");
+    }
+
+    function sqlEsc(value){
+      return String(value ?? "").replace(/'/g,"''");
+    }
+
     function slug(value){
-      return String(value || "module")
+      return String(value || "projet")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g,"")
         .toLowerCase()
         .replace(/[^a-z0-9]+/g,"-")
         .replace(/^-+|-+$/g,"")
-        .slice(0,70) || "module";
-    }
-
-    function upper(value){
-      return String(value || "").trim().toUpperCase();
+        .slice(0,70) || "projet";
     }
 
     function lines(value){
-      return String(value || "")
-        .split(/\n|;/g)
+      const raw = String(value || "")
+        .split(/\n|,|;/g)
         .map(x => x.trim())
         .filter(Boolean);
+      return [...new Set(raw)];
+    }
+
+    function looksLikeUrl(value){
+      return /^https?:\/\//i.test(String(value || "").trim());
+    }
+
+    function numberXof(value){
+      const raw = String(value || "").replace(/[^\d]/g,"");
+      const n = Number(raw || 0);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function money(value){
+      const n = numberXof(value);
+      return n ? n.toLocaleString("fr-FR") + " FCFA" : "À compléter";
+    }
+
+    function waDigits(value){
+      return String(value || "").replace(/[^0-9]/g,"");
+    }
+
+    function imageUrl(value){
+      const url = String(value || "").trim();
+      if(!url) return "";
+
+      const fileMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+      const idParam = url.match(/[?&]id=([^&]+)/);
+      const openMatch = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+      const id = (fileMatch && fileMatch[1]) || (idParam && idParam[1]) || (openMatch && openMatch[1]) || "";
+
+      if(id) return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w1200";
+
+      try{
+        return encodeURI(url);
+      }catch(_){
+        return url;
+      }
+    }
+
+    function galleryItems(value){
+      const fallbackTitles = [
+        "Photo principale","Preuve terrain","Réalisation","Détail",
+        "Ambiance","Équipe","Avant / après","Contact"
+      ];
+
+      const items = [];
+      const looseUrls = [];
+
+      String(value || "").split(/\n/g).forEach(line => {
+        const raw = line.trim();
+        if(!raw) return;
+
+        if(raw.includes("|")){
+          const parts = raw.split("|");
+          const title = (parts.shift() || "").trim();
+          const rest = parts.join("|").trim();
+          const url = looksLikeUrl(rest) ? rest : "";
+          items.push({
+            title:title || fallbackTitles[items.length] || ("Photo " + (items.length + 1)),
+            url
+          });
+          return;
+        }
+
+        if(looksLikeUrl(raw)){
+          looseUrls.push(raw);
+          return;
+        }
+
+        items.push({
+          title:raw || fallbackTitles[items.length] || ("Photo " + (items.length + 1)),
+          url:""
+        });
+      });
+
+      looseUrls.forEach(url => {
+        const empty = items.find(item => !item.url);
+        if(empty){
+          empty.url = url;
+        }else{
+          items.push({
+            title:fallbackTitles[items.length] || ("Photo " + (items.length + 1)),
+            url
+          });
+        }
+      });
+
+      return items.slice(0,12);
     }
 
     function data(){
       return {
-        moduleCode:upper($("moduleCode").value || "LOC"),
-        modulePublicName:$("modulePublicName").value.trim() || "Je loue",
-        moduleProName:$("moduleProName").value.trim() || "Espace propriétaire",
-        moduleTerrain:$("moduleTerrain").value.trim() || "Saly, Sénégal",
-        moduleMission:$("moduleMission").value.trim(),
-        publicAudience:$("publicAudience").value.trim(),
-        proAudience:$("proAudience").value.trim(),
-        publicGoal:$("publicGoal").value.trim(),
-        proGoal:$("proGoal").value.trim(),
-        masterGesture:$("masterGesture").value.trim() || "Action principale",
-        moneyBridge:$("moneyBridge").value.trim(),
-        publicPages:lines($("publicPages").value),
-        proPages:lines($("proPages").value),
-        publicActions:lines($("publicActions").value),
-        proActions:lines($("proActions").value),
-        securityRules:lines($("securityRules").value),
-        sqlNeeds:lines($("sqlNeeds").value),
-        visualStyle:$("visualStyle").value.trim()
+        projectName:$("projectName").value.trim() || "Projet DIGIY",
+        typeKey:$("typeKey").value || "generic",
+        city:$("city").value.trim() || "Saly, Sénégal",
+        style:$("style").value.trim() || "Mobile, clair, chaleureux, rassurant",
+        contactPhone:$("contactPhone").value.trim(),
+        hours:$("hours").value.trim(),
+        address:$("address").value.trim(),
+        activity:$("activity").value.trim() || "Activité locale à présenter simplement.",
+        goal:$("goal").value.trim() || "Présenter l’activité, rassurer le client et faciliter le contact.",
+        audience:$("audience").value.trim() || "Clients locaux et visiteurs",
+        specialFeatures:lines($("specialFeatures").value),
+        extraSections:lines($("extraSections").value),
+        galleryPhotos:galleryItems($("galleryPhotos").value),
+        galleryRaw:$("galleryPhotos").value.trim(),
+
+        posProducts:lines($("posProducts").value),
+        posActions:lines($("posActions").value),
+        posPhrases:lines($("posPhrases").value),
+        posAliases:lines($("posAliases").value),
+        posWorkflow:$("posWorkflow").value.trim(),
+
+        quoteClient:$("quoteClient").value.trim(),
+        quoteWorkType:$("quoteWorkType").value.trim(),
+        quoteMeasure:$("quoteMeasure").value.trim(),
+        quoteMaterials:$("quoteMaterials").value.trim(),
+        quoteLabor:$("quoteLabor").value.trim(),
+        quoteMaterialCost:$("quoteMaterialCost").value.trim(),
+        quoteTravel:$("quoteTravel").value.trim(),
+        quoteOther:$("quoteOther").value.trim(),
+        quoteDelay:$("quoteDelay").value.trim(),
+        quoteDeposit:$("quoteDeposit").value.trim(),
+        quoteValidity:$("quoteValidity").value.trim() || "7 jours",
+        quoteNotes:$("quoteNotes").value.trim()
       };
     }
 
-    function moduleSlug(d){
-      return slug("digiy-" + d.moduleCode.toLowerCase() + "-" + d.modulePublicName);
+    const defaultsByType = {
+      restaurant:{
+        projectName:"Restaurant Teranga Saly",
+        city:"Saly, Sénégal",
+        style:"Premium, mobile, chaleureux, africain, clair, rassurant",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Tous les jours · 11h30 — 23h00",
+        address:"Saly centre · proche route principale",
+        activity:"Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.",
+        goal:"Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.",
+        audience:"Clients locaux, familles, touristes, groupes, visiteurs de Saly",
+        specialFeatures:"Spécialités sénégalaises\nRéservation directe\nContact WhatsApp\nPlats du jour\nGroupes et événements privés\nPhotos et avis\nHoraires clairs",
+        extraSections:"Plat détail\nCommande\nTémoignages\nGalerie\nTarifs\nÀ propos\nÉvénements privés\nFAQ",
+        galleryPhotos:"Photo du restaurant |\nPlat du jour |\nPoisson grillé |\nSalle ou terrasse |"
+      },
+      hotel:{
+        projectName:"Maison d’hôtes Saly",
+        city:"Saly, Sénégal",
+        style:"Calme, premium, solaire, hospitalité locale, mobile",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Arrivées sur rendez-vous",
+        address:"Saly · repère à préciser",
+        activity:"Logement ou maison d’hôtes avec chambres, disponibilité, repères du quartier et contact direct.",
+        goal:"Présenter le lieu, rassurer le voyageur, montrer les tarifs et faciliter une demande de réservation directe.",
+        audience:"Voyageurs, familles, couples, clients de passage, diaspora",
+        specialFeatures:"Chambres disponibles\nContact direct\nPhotos du lieu\nTarifs nuit semaine mois\nQuartier et repères\nDisponibilités\nConseils locaux",
+        extraSections:"Chambres\nDisponibilités\nGalerie\nTarifs\nQuartier\nRèglement\nFAQ",
+        galleryPhotos:"Façade du lieu |\nChambre |\nTerrasse |\nQuartier |"
+      },
+      boutique:{
+        projectName:"Astou Market",
+        city:"Saly, Sénégal",
+        style:"Boutique claire, visuelle, directe, confiance, mobile",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Lundi à samedi · 9h00 — 20h00",
+        address:"Saly centre",
+        activity:"Boutique locale avec produits, photos, prix indicatifs et contact WhatsApp direct.",
+        goal:"Présenter la boutique, mettre en avant les produits, faciliter la demande client et préparer la vente directe.",
+        audience:"Clients du quartier, visiteurs, habitués, acheteurs WhatsApp",
+        specialFeatures:"Produits visibles\nPrix clairs\nCommande WhatsApp\nPhotos produits\nConseil direct\nRetrait ou livraison",
+        extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ",
+        galleryPhotos:"Produit phare |\nRayon boutique |\nNouveautés |\nCommande prête |"
+      },
+      pos:{
+        projectName:"POS Boutique Linge & Style",
+        city:"Saly, Sénégal",
+        style:"Caisse textile simple, mobile, gros boutons, marchandises, tailles, couleurs, écoute métier",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Tous les jours · horaires boutique",
+        address:"Comptoir boutique textile · zone à préciser",
+        activity:"Logiciel de caisse POS pour boutique de linge de maison, robes stylées, tenues, foutas, draps, serviettes, parures de lit et marchandises textiles. La caisse aide à vendre vite, suivre les prix, gérer les stocks, noter les tailles, couleurs, commandes clientes, dettes, remises et garder les ventes propres.",
+        goal:"Dégrossir un logiciel POS adapté au commerce textile : former le pro avec des phrases simples, former la caisse avec des règles métier, préparer les actions puis laisser le pro valider avant exécution.",
+        audience:"Boutiques de linge de maison, vendeuses de robes, commerces textile, boutiques de plage, hôtels, villas, familles, clientes locales et visiteurs",
+        specialFeatures:"Marchandises propres\nPrix visibles\nStock par modèle\nCouleurs et tailles\nPanier rapide\nAddition claire\nRemise possible\nCommande cliente\nDette client\nEncaisser\nStats locales\nTicket au choix\nOreille métier\nValidation avant action",
+        extraSections:"Caisse\nMarchandises\nStock\nCouleurs\nTailles\nOreille métier\nPanier\nAddition\nPaiement\nNotes clientes\nStats\nTicket\nEntraînement",
+        galleryPhotos:"Comptoir textile |\nMarchandises |\nRobes stylées |\nLinge de maison |",
+        posProducts:"Drap 2 places | 15000\nDrap 1 place | 9000\nServiette bain | 5000\nServiette plage | 7000\nFouta | 8000\nRobe stylée | 18000\nRobe plage | 12000\nTenue femme | 25000\nParure lit | 22000\nCoussin déco | 6000\nNappe maison | 10000\nCrème beauté | 3500",
+        posActions:"Vendre\nAjouter au panier\nAjouter du stock\nChanger quantité\nChanger prix\nFaire remise\nNoter taille\nNoter couleur\nNoter commande cliente\nNoter dette client\nEncaisser\nVoir stats\nTicket au choix\nNouvelle vente",
+        posPhrases:"robe stylée 1 à 18000\n2 serviettes bain à 5000\ndrap 2 places 1 à 15000\nfouta 3 à 8000\nparure lit 1 à 22000\najoute 12 serviettes bain à 5000\nAwa doit 10000 pour robe stylée\nnote couleur bleue taille M\nva aux stats\nouvre les marchandises\nnouvelle vente",
+        posAliases:"article = marchandise\narticles = marchandises\nserviettes = serviette\nrobes = robe\ndraps = drap\nfoutas = fouta\nparures = parure\ndeux = 2\ntrois = 3\nquatre = 4\nbleu = bleue\ntaille moyenne = taille M\nstat = stats\nstatistique = stats",
+        posWorkflow:"Le pro parle ou clique. DIGIY prépare un brouillon. Le pro valide. La caisse ajoute la marchandise au panier. L’addition s’ouvre. Le pro confirme. Le paiement est choisi. Encaisser enregistre les stats. Le ticket reste au choix si la cliente le demande."
+      },
+      service:{
+        projectName:"Ndiaga Services Saly",
+        city:"Saly, Sénégal",
+        style:"Simple, sérieux, humain, local, mobile",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Sur rendez-vous",
+        address:"Saly et environs",
+        activity:"Service terrain local : artisan, réparateur, aide maison, nettoyage, travaux ou prestation directe.",
+        goal:"Présenter le savoir-faire, inspirer confiance, recevoir une demande claire et faciliter le contact direct.",
+        audience:"Habitants, propriétaires, commerces, familles, professionnels locaux",
+        specialFeatures:"Demande rapide\nContact WhatsApp\nPhotos avant après\nZone d’intervention\nTarifs indicatifs\nUrgence possible",
+        extraSections:"Services\nDemande de devis\nRéalisations\nTarifs\nAvis\nZone couverte\nFAQ",
+        galleryPhotos:"Réalisation |\nAvant / après |\nÉquipe |\nMatériel |"
+      },
+      event:{
+        projectName:"Événement à Saly",
+        city:"Saly, Sénégal",
+        style:"Festif, clair, chaleureux, mobile, rassurant",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Date et heure à préciser",
+        address:"Lieu à préciser",
+        activity:"Page de présentation pour un événement, une soirée, une rencontre, un atelier ou une activité locale.",
+        goal:"Présenter le programme, donner les informations pratiques et faciliter l’inscription ou le contact.",
+        audience:"Participants, familles, visiteurs, communauté locale",
+        specialFeatures:"Programme\nInscription directe\nLieu et horaires\nContact WhatsApp\nPhotos\nInformations pratiques",
+        extraSections:"Programme\nInscription\nGalerie\nTarifs\nLieu\nOrganisateur\nFAQ",
+        galleryPhotos:"Affiche événement |\nLieu |\nAmbiance |\nOrganisateur |"
+      },
+      generic:{
+        projectName:"Projet DIGIY",
+        city:"Saly, Sénégal",
+        style:"Simple, clair, mobile, humain, rassurant",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Horaires à préciser",
+        address:"Repère à préciser",
+        activity:"Projet local à présenter avec une page claire et directe.",
+        goal:"Expliquer le projet, rassurer, montrer les informations utiles et guider vers l’action.",
+        audience:"Public local, clients, partenaires, visiteurs",
+        specialFeatures:"Présentation claire\nContact direct\nInformations pratiques\nConfiance\nAction simple",
+        extraSections:"Présentation\nOffres\nContact\nGalerie\nTarifs\nFAQ",
+        galleryPhotos:"Photo principale |\nPreuve terrain |\nOffre |\nContact |"
+      }
+    };
+
+    function applyTypeDefaults(force){
+      const type = $("typeKey").value || "generic";
+      const d = defaultsByType[type] || defaultsByType.generic;
+
+      [
+        "projectName","city","style","contactPhone","hours","address",
+        "activity","goal","audience","specialFeatures","extraSections","galleryPhotos",
+        "posProducts","posActions","posPhrases","posAliases","posWorkflow"
+      ].forEach(id => {
+        const el = $(id);
+        if(force || !el.value.trim()) el.value = d[id] || "";
+      });
+
+      if(type === "service" && force){
+        setServiceQuoteExample(false);
+      }
+
+      if(force){
+        setStatus("Exemple chargé pour : " + type);
+        toast("Exemple chargé");
+      }
     }
 
-    function briefModule(d){
+    function setServiceQuoteExample(showToast = true){
+      $("typeKey").value = "service";
+      applyTypeDefaults(true);
+
+      $("quoteClient").value = "Client à préciser";
+      $("quoteWorkType").value = "Pose carrelage terrasse";
+      $("quoteMeasure").value = "25 m²";
+      $("quoteMaterials").value = "Carreaux, colle, ciment, sable, joints, croisillons, transport matériel";
+      $("quoteLabor").value = "75000";
+      $("quoteMaterialCost").value = "120000";
+      $("quoteTravel").value = "10000";
+      $("quoteOther").value = "15000";
+      $("quoteDelay").value = "2 à 3 jours après validation";
+      $("quoteDeposit").value = "50% au démarrage";
+      $("quoteValidity").value = "7 jours";
+      $("quoteNotes").value = "Prix à confirmer après visite du terrain. Matériaux selon disponibilité. Finition à préciser avec le client.";
+
+      setStatus("Exemple pré-devis artisan chargé.");
+      if(showToast) toast("Pré-devis chargé");
+    }
+
+    function sectionTitleByType(d){
+      if(d.typeKey === "restaurant") return "Menu et spécialités";
+      if(d.typeKey === "hotel") return "Lieu et hospitalité";
+      if(d.typeKey === "boutique") return "Produits et boutique";
+      if(d.typeKey === "pos") return "Caisse, marchandises et actions métier";
+      if(d.typeKey === "service") return "Services proposés";
+      if(d.typeKey === "event") return "Programme et informations";
+      return "Ce que nous proposons";
+    }
+
+    function actionLabelByType(d){
+      if(d.typeKey === "restaurant") return "Réserver / contacter";
+      if(d.typeKey === "hotel") return "Demander une réservation";
+      if(d.typeKey === "boutique") return "Commander / contacter";
+      if(d.typeKey === "pos") return "Préparer la caisse";
+      if(d.typeKey === "service") return "Demander un devis";
+      if(d.typeKey === "event") return "S’inscrire / contacter";
+      return "Contacter";
+    }
+
+    function buildNav(d){
+      const base = [
+        {id:"accueil", label:"Accueil"},
+        {id:"offre", label:d.typeKey === "restaurant" ? "Menu" : "Offre"}
+      ];
+
+      const extra = d.extraSections.slice(0,10).map(s => ({
+        id:slug(s),
+        label:s
+      }));
+
       return [
-        "# BRIEF MODULE DIGIY — " + d.moduleCode,
-        "",
-        "Nom public : " + d.modulePublicName,
-        "Nom espace pro : " + d.moduleProName,
-        "Terrain : " + d.moduleTerrain,
-        "Style : " + d.visualStyle,
-        "",
-        "## Doctrine mère",
-        "Projet Maison dessine le module. DIGIY le sécurise. Le terrain le valide.",
-        "",
-        "## Mission",
-        d.moduleMission || "À préciser.",
-        "",
-        "## Face publique",
-        "- Public visé : " + (d.publicAudience || "À préciser"),
-        "- Objectif : " + (d.publicGoal || "À préciser"),
-        "",
-        "## Face pro",
-        "- Professionnels visés : " + (d.proAudience || "À préciser"),
-        "- Objectif : " + (d.proGoal || "À préciser"),
-        "- Geste maître mobile : " + d.masterGesture,
-        "",
-        "## Argent / Mon argent",
-        d.moneyBridge || "À préciser.",
-        "",
-        "## Valeur DIGIY",
-        "- Présence digitale simple",
-        "- Contact direct",
-        "- 0% commission",
-        "- Paiement direct au professionnel",
-        "- Outils métier simples",
-        "- Protection des informations sensibles",
-        "",
-        "## Nature de cette sortie",
-        "Ceci est une esquisse de module. Ce n’est pas encore le module final branché au backend réel."
-      ].join("\\n");
+        ...base,
+        ...extra,
+        {id:"demande", label:d.typeKey === "service" ? "Devis" : "Demande"},
+        {id:"contact", label:"Contact"}
+      ];
     }
 
-    function cartography(d){
+    function brief(d){
       return [
-        "# CARTOGRAPHIE MODULE — " + d.moduleCode,
+        "# Brief — " + d.projectName,
         "",
-        "## Face publique : " + d.modulePublicName,
-        ...(d.publicPages.length ? d.publicPages.map(x => "- " + x) : ["- index.html = vitrine publique", "- fiche.html = fiche publique"]),
+        "Chaque partenaire est une facette. DIGIY lui donne la lumière.",
         "",
-        "## Face pro : " + d.moduleProName,
-        ...(d.proPages.length ? d.proPages.map(x => "- " + x) : ["- dashboard-pro.html = accueil pro", "- pin.html = accès sécurisé", "- guard.js = session 8h"]),
+        "- Type : " + d.typeKey,
+        "- Zone : " + d.city,
+        "- Style : " + d.style,
+        "- WhatsApp : " + (d.contactPhone || "à préciser"),
+        "- Horaires : " + (d.hours || "à préciser"),
+        "- Repère : " + (d.address || "à préciser"),
         "",
-        "## Actions côté client",
-        ...(d.publicActions.length ? d.publicActions.map(x => "- " + x) : ["- Comprendre", "- Contacter"]),
+        "## Activité",
+        d.activity,
         "",
-        "## Actions côté professionnel",
-        ...(d.proActions.length ? d.proActions.map(x => "- " + x) : ["- Gérer", "- Répondre"]),
+        "## Objectif",
+        d.goal,
         "",
-        "## Navigation mobile recommandée",
-        "- Accueil",
-        "- Activité principale",
-        "- " + d.masterGesture,
-        "- Notes",
-        "- Plus",
+        "## Public",
+        d.audience,
         "",
-        "## Règle",
-        "La page publique donne envie. La page pro donne le contrôle."
-      ].join("\\n");
+        "## Points importants",
+        ...(d.specialFeatures.length ? d.specialFeatures.map(x => "- " + x) : ["- Contact direct","- Confiance","- Informations pratiques"]),
+        "",
+        "## Pré-devis artisan",
+        "- Client : " + (d.quoteClient || "à préciser"),
+        "- Intervention : " + (d.quoteWorkType || "à préciser"),
+        "- Surface / quantité : " + (d.quoteMeasure || "à préciser"),
+        "- Délai : " + (d.quoteDelay || "à préciser"),
+        "- Total estimatif : " + quoteTotalLabel(d),
+        "- Validation : prix final à confirmer par l’artisan après vérification du terrain.",
+        "",
+        "## Galerie photos",
+        ...(d.galleryPhotos.length ? d.galleryPhotos.map(x => "- " + x.title + (x.url ? " — " + x.url : " — URL à ajouter")) : ["- URL photos à ajouter"]),
+        "",
+        "## Sections",
+        ...buildNav(d).map(x => "- " + x.label + " (#" + x.id + ")")
+      ].join("\n");
     }
 
-    function promptsByFile(d){
-      const publicPrompt = [
-        "Créer le fichier public index.html pour le module DIGIY " + d.moduleCode + ".",
-        "Nom public : " + d.modulePublicName + ".",
-        "Terrain : " + d.moduleTerrain + ".",
-        "Objectif : " + d.publicGoal,
-        "Style : " + d.visualStyle + ".",
-        "Contraintes : mobile d'abord, contact direct, 0% commission, paiement direct au professionnel, pas de jargon technique, boutons visibles.",
-        "Ne pas afficher d'information privée."
-      ].join(" ");
+    function promptIA(d){
+      if(d.typeKey === "pos"){
+        const products = d.posProducts.length ? d.posProducts : [
+          "Drap 2 places | 15000","Serviette bain | 5000","Robe stylée | 18000","Fouta | 8000"
+        ];
 
-      const proPrompt = [
-        "Créer le fichier dashboard-pro.html pour le module DIGIY " + d.moduleCode + ".",
-        "Nom espace pro : " + d.moduleProName + ".",
-        "Objectif : " + d.proGoal,
-        "Geste maître : " + d.masterGesture + ".",
-        "Inclure une navigation mobile : Accueil, activité, action principale, notes, plus.",
-        "Ne jamais exposer phone, slug ou token dans l'interface.",
-        "Prévoir session PIN 8h via guard.js."
-      ].join(" ");
+        const actions = d.posActions.length ? d.posActions : [
+          "Vendre","Ajouter au panier","Ajouter du stock","Faire remise","Noter dette client","Encaisser","Voir stats","Ticket au choix"
+        ];
 
-      const guardPrompt = [
-        "Créer guard.js pour le module " + d.moduleCode + ".",
-        "Session locale 8h, slug comme contexte interne, téléphone privé gardé localement, nettoyage des URL visibles.",
-        "PIN obligatoire si session absente.",
-        "Ne pas centraliser tous les modules dans un guard unique."
-      ].join(" ");
+        const phrases = d.posPhrases.length ? d.posPhrases : [
+          "robe stylée 1 à 18000","2 serviettes bain à 5000","fouta 3 à 8000","va aux stats"
+        ];
+
+        const aliases = d.posAliases.length ? d.posAliases : [
+          "robes = robe","serviettes = serviette","deux = 2","stat = stats"
+        ];
+
+        return [
+          "Tu es un assistant de recouture de logiciel POS DIGIYLYFE.",
+          "Tu ne dois pas créer une page web vitrine.",
+          "Tu dois améliorer le logiciel de caisse existant, fichier cible conseillé : caisse.html.",
+          "",
+          "Projet : " + d.projectName,
+          "Type : logiciel POS métier",
+          "Zone : " + d.city,
+          "Style : " + d.style,
+          "Activité : " + d.activity,
+          "Objectif : " + d.goal,
+          "Public : " + d.audience,
+          "",
+          "Doctrine :",
+          "Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+          "",
+          "Marchandises prioritaires :",
+          ...products.map(x => "- " + x),
+          "",
+          "Actions métier à gérer :",
+          ...actions.map(x => "- " + x),
+          "",
+          "Phrases officielles d'entraînement :",
+          ...phrases.map(x => "- " + x),
+          "",
+          "Corrections micro / synonymes :",
+          ...aliases.map(x => "- " + x),
+          "",
+          "Parcours attendu :",
+          d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.",
+          "",
+          "Écrans et fonctions à préserver :",
+          "- Caisse",
+          "- Marchandises / produits",
+          "- Recherche",
+          "- Panier",
+          "- Addition",
+          "- Paiement",
+          "- Encaisser",
+          "- Stats locales",
+          "- Notes clientes",
+          "- Ticket au choix",
+          "- Oreille métier discrète",
+          "",
+          "Règles non négociables :",
+          "- La caisse doit marcher au clic même sans micro.",
+          "- La voix ne doit jamais encaisser seule.",
+          "- La voix prépare seulement un brouillon.",
+          "- Le pro valide avant action.",
+          "- Encaisser seulement après paiement réel.",
+          "- Les stats se gardent uniquement après Encaisser.",
+          "- Le ticket reste au choix, il ne sort pas automatiquement.",
+          "- Mobile d’abord : gros boutons, peu d’écriture, lecture simple.",
+          "",
+          "Sortie attendue :",
+          "Recoudre le fichier caisse.html complet, prêt à poser, sans refaire toute l’interface si elle marche déjà."
+        ].join("\n");
+      }
 
       return [
-        "# PROMPTS PAR FICHIER — " + d.moduleCode,
+        "Tu es un assistant de création de page web locale.",
+        "Crée une page HTML mobile, claire, chaleureuse et rassurante.",
         "",
-        "## index.html public",
-        publicPrompt,
+        "Projet : " + d.projectName,
+        "Type : " + d.typeKey,
+        "Zone : " + d.city,
+        "Style : " + d.style,
+        "WhatsApp : " + (d.contactPhone || "à préciser"),
+        "Horaires : " + (d.hours || "à préciser"),
+        "Repère : " + (d.address || "à préciser"),
+        "Activité : " + d.activity,
+        "Objectif : " + d.goal,
+        "Public : " + d.audience,
         "",
-        "## fiche.html public",
-        "Créer une fiche publique détaillée : photos, informations essentielles, prix ou conditions, bouton contact direct, mention 0% commission.",
+        "Pré-devis artisan :",
+        "- Intervention : " + (d.quoteWorkType || "à préciser"),
+        "- Surface / quantité : " + (d.quoteMeasure || "à préciser"),
+        "- Matériaux : " + (d.quoteMaterials || "à préciser"),
+        "- Main-d’œuvre : " + money(d.quoteLabor),
+        "- Matériaux estimés : " + money(d.quoteMaterialCost),
+        "- Déplacement : " + money(d.quoteTravel),
+        "- Imprévus : " + money(d.quoteOther),
+        "- Total estimatif : " + quoteTotalLabel(d),
         "",
-        "## dashboard-pro.html",
-        proPrompt,
+        "Règle importante : ne jamais présenter ce devis comme un prix définitif.",
+        "Formulation obligatoire : “Base de devis préparée par DIGIY. Prix final à confirmer par l’artisan après vérification du terrain.”",
         "",
-        "## page outil métier",
-        "Créer la page de l'action principale : " + d.masterGesture + ". Elle doit être ultra simple sur téléphone.",
+        "Sections attendues :",
+        ...buildNav(d).map(x => "- " + x.label),
         "",
-        "## notes.html",
-        "Créer les Notes rapides reliées à Mon argent : le pro écrit une phrase simple, DIGIY prépare la trace.",
-        "",
-        "## profile.html",
-        "Créer la page Plus : fiche publique, photos, prix, QR, support, liens utiles.",
-        "",
-        "## guard.js",
-        guardPrompt
-      ].join("\\n");
+        "Contraintes : phrases courtes, boutons visibles, contact direct, galerie diapo premium si URLs fournies, pas de jargon technique, rendu agréable sur téléphone."
+      ].join("\n");
     }
 
-    function sqlRpc(d){
+    function sql(d){
+      if(d.typeKey === "pos"){
+        return [
+          "-- POS DIGIY — Mémo technique léger",
+          "-- Pas de SQL obligatoire pour la première version terrain.",
+          "-- La caisse doit rester autonome sur téléphone avec localStorage.",
+          "",
+          "-- Données locales à prévoir :",
+          "-- caisse_prods : marchandises, prix, stock, catégorie, couleur, taille si besoin",
+          "-- caisse_ventes : ventes encaissées, lignes, total, paiement, date",
+          "-- caisse_notes : dettes clientes, commandes, couleurs, tailles, demandes",
+          "",
+          "-- Si Supabase arrive plus tard :",
+          "-- synchroniser seulement après stabilisation du parcours local.",
+          "-- Ne pas bloquer la caisse si le réseau est absent.",
+          "",
+          "-- Projet : " + sqlEsc(d.projectName),
+          "-- Type : POS écoute métier",
+          "-- Zone : " + sqlEsc(d.city)
+        ].join("\n");
+      }
+
       return [
-        "-- SQL / RPC CONSEILLÉ — " + d.moduleCode,
-        "-- Ceci est un plan, pas un SQL final à exécuter sans audit.",
+        "-- DIGIY Projet Maison Builder — SQL léger",
+        "-- Aucun stockage image Supabase.",
+        "-- Les photos restent sur Google Drive, WordPress média ou toute URL publique directe.",
+        "-- Le pré-devis reste une sortie texte / JSON à valider par l’artisan.",
+        "-- Rien à créer en base pour la galerie.",
         "",
-        "-- Tables / vues / RPC à prévoir :",
-        ...(d.sqlNeeds.length ? d.sqlNeeds.map(x => "-- - " + x) : ["-- - Table principale", "-- - RPC public", "-- - RPC pro sécurisé"]),
-        "",
-        "-- Doctrine :",
-        "-- Public : lecture seulement des objets publiés.",
-        "-- Pro : écriture protégée par RLS et session valide.",
-        "-- Slug : contexte principal.",
-        "-- Téléphone : donnée privée, jamais affichée en URL.",
-        "-- PAY : push seulement après validation métier.",
-        "",
-        "-- Exemple de noms possibles :",
-        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_public_list()",
-        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_public_detail(p_slug text)",
-        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_pro_summary(p_slug text)",
-        "-- public.digiy_" + d.moduleCode.toLowerCase() + "_create_request(p_payload jsonb)",
-        "",
-        "-- À faire avant production :",
-        "-- 1. vérifier tables réelles",
-        "-- 2. activer RLS",
-        "-- 3. limiter grants anon",
-        "-- 4. tester le parcours public",
-        "-- 5. tester le parcours PIN pro"
-      ].join("\\n");
+        "-- Option mémoire seulement, si un jour tu veux garder une trace texte :",
+        "-- project_id : " + sqlEsc(slug(d.projectName)),
+        "-- project_name : " + sqlEsc(d.projectName),
+        "-- city : " + sqlEsc(d.city),
+        "-- whatsapp : " + sqlEsc(d.contactPhone || "à préciser"),
+        "-- quote_work_type : " + sqlEsc(d.quoteWorkType || "à préciser"),
+        "-- quote_total_estimated_xof : " + sqlEsc(String(quoteTotal(d) || 0)),
+        "-- quote_warning : prix final à confirmer par l’artisan après vérification du terrain"
+      ].join("\n");
     }
 
-    function securityDoc(d){
+    function realisation(d){
+      if(d.typeKey === "pos"){
+        return [
+          "# Plan de réalisation logiciel POS — " + d.projectName,
+          "",
+          "## 1. Ne pas générer une vitrine",
+          "- Le mode POS sert à cadrer un logiciel de caisse.",
+          "- La page HTML reste secondaire.",
+          "- Le fichier cible réel sera caisse.html.",
+          "",
+          "## 2. Cœur logiciel",
+          "- Marchandises propres : nom, prix, stock, modèle, taille/couleur si utile.",
+          "- Panier rapide.",
+          "- Addition claire.",
+          "- Paiement choisi.",
+          "- Encaissement.",
+          "- Stats locales.",
+          "- Ticket au choix.",
+          "",
+          "## 3. Oreille métier",
+          "- La voix prépare un brouillon.",
+          "- Le pro valide.",
+          "- La caisse exécute.",
+          "- La voix ne doit jamais encaisser seule.",
+          "",
+          "## 4. Tests terrain",
+          "- Marchandise seule si déjà créée.",
+          "- Marchandise + quantité + prix.",
+          "- Ajout de stock.",
+          "- Note cliente.",
+          "- Dette cliente.",
+          "- Encaissement et stats.",
+          "- Ticket au choix.",
+          "",
+          "## 5. Recouture",
+          "- Utiliser l’onglet Prompt recouture POS.",
+          "- Recoudre caisse.html complet.",
+          "- Garder mobile-first, gros boutons, peu d’écriture."
+        ].join("\n");
+      }
+
       return [
-        "# SÉCURITÉ PUBLIC / PRO — " + d.moduleCode,
+        "# Plan de réalisation — " + d.projectName,
         "",
-        "## Règles déclarées",
-        ...(d.securityRules.length ? d.securityRules.map(x => "- " + x) : ["- À préciser"]),
+        "## 1. Page publique",
+        "- Poser une page HTML simple.",
+        "- Mettre le nom, la zone, l’activité et l’objectif dès le haut.",
+        "- Ajouter un bouton direct : " + actionLabelByType(d) + ".",
         "",
-        "## Doctrine DIGIY",
-        "- Public = vitrine propre.",
-        "- Pro = coffre sécurisé.",
-        "- Aucune donnée sensible dans les URL visibles.",
-        "- PIN 8h côté pro.",
-        "- Guard séparé par module.",
-        "- Slug comme contexte interne.",
-        "- Pas de service_role côté front.",
-        "- Les actions financières vont vers Mon argent, DIGIY ne garde pas les fonds.",
+        "## 2. Contact terrain",
+        "- Vérifier le WhatsApp : " + (d.contactPhone || "à préciser"),
+        "- Vérifier les horaires : " + (d.hours || "à préciser"),
+        "- Vérifier le repère : " + (d.address || "à préciser"),
         "",
-        "## Points à auditer avant ouverture",
-        "- Les liens Site / HUB / Tarifs / Espace pro.",
-        "- Les retours internes.",
-        "- Les formulaires publics.",
-        "- Les grants Supabase.",
-        "- Les RLS.",
-        "- Les RPC publiques.",
-        "- La présence ou non du téléphone dans l’URL.",
-        "- Les pages cachées ou brouillon."
-      ].join("\\n");
+        "## 3. Pré-devis artisan",
+        "- Vérifier les quantités.",
+        "- Vérifier la difficulté réelle du chantier.",
+        "- Corriger les matériaux selon le terrain.",
+        "- Faire valider le total par l’artisan.",
+        "- Ne jamais promettre un prix final sans visite ou confirmation.",
+        "",
+        "## 4. Sections",
+        ...buildNav(d).map((x,i) => (i + 1) + ". " + x.label + " — ancre #" + x.id),
+        "",
+        "## 5. Vérification",
+        "- Tester sur téléphone.",
+        "- Cliquer chaque bouton du menu.",
+        "- Cliquer Envoyer la demande et vérifier l’ouverture WhatsApp.",
+        "- Relire le pré-devis avant envoi client."
+      ].join("\n");
     }
 
-    function publicPrototype(d){
-      const code = esc(d.moduleCode);
-      const name = esc(d.modulePublicName);
-      const terrain = esc(d.moduleTerrain);
-      const goal = esc(d.publicGoal);
-      const actions = d.publicActions.slice(0,6).map(x => `<li>${esc(x)}</li>`).join("");
+    function quoteTotal(d){
+      return numberXof(d.quoteLabor) + numberXof(d.quoteMaterialCost) + numberXof(d.quoteTravel) + numberXof(d.quoteOther);
+    }
+
+    function quoteTotalLabel(d){
+      const total = quoteTotal(d);
+      return total ? total.toLocaleString("fr-FR") + " FCFA" : "À compléter";
+    }
+
+    function devisArtisan(d){
+      return [
+        "PRÉ-DEVIS ARTISAN — BASE À VALIDER",
+        "",
+        "Projet : " + d.projectName,
+        "Client : " + (d.quoteClient || "À préciser"),
+        "Zone : " + d.city,
+        "Contact : " + (d.contactPhone || "À préciser"),
+        "",
+        "IMPORTANT",
+        "Ce document est une base préparée par DIGIY. Le prix final doit être confirmé par l’artisan après vérification du terrain, des quantités, de l’accès, de l’urgence et des matériaux disponibles.",
+        "",
+        "1. DEMANDE",
+        "- Type d’intervention : " + (d.quoteWorkType || "À préciser"),
+        "- Surface / quantité : " + (d.quoteMeasure || "À préciser"),
+        "- Description activité : " + d.activity,
+        "- Objectif client : " + d.goal,
+        "",
+        "2. MATÉRIAUX / FOURNITURES",
+        d.quoteMaterials || "À préciser par l’artisan.",
+        "",
+        "3. ESTIMATION",
+        "- Main-d’œuvre : " + money(d.quoteLabor),
+        "- Matériaux : " + money(d.quoteMaterialCost),
+        "- Déplacement / transport : " + money(d.quoteTravel),
+        "- Marge / imprévus : " + money(d.quoteOther),
+        "",
+        "TOTAL ESTIMATIF : " + quoteTotalLabel(d),
+        "",
+        "4. CONDITIONS",
+        "- Délai estimé : " + (d.quoteDelay || "À préciser"),
+        "- Acompte conseillé : " + (d.quoteDeposit || "À préciser"),
+        "- Validité du devis : " + (d.quoteValidity || "7 jours"),
+        "",
+        "5. NOTES ARTISAN",
+        d.quoteNotes || "À compléter après échange ou visite terrain.",
+        "",
+        "Phrase client conseillée :",
+        "“Voici une base de devis préparée pour clarifier la demande. Je confirme le prix final après vérification du terrain et des matériaux.”",
+        "",
+        "BY DIGIYLYFE · L’outil prépare. L’artisan valide. Le client comprend."
+      ].join("\n");
+    }
+
+    function galleryHtml(d){
+      const items = (d.galleryPhotos && d.galleryPhotos.length ? d.galleryPhotos : [
+        {title:"Photo principale",url:""},
+        {title:"Réalisation",url:""},
+        {title:"Preuve terrain",url:""},
+        {title:"Contact",url:""}
+      ]).slice(0,8);
+
+      const slides = items.map((item,index) => {
+        const title = esc(item.title || ("Photo " + (index + 1)));
+        const url = imageUrl(item.url);
+
+        if(url){
+          return `<figure class="gallery-slide${index===0 ? " active" : ""}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer"><figcaption><strong>${title}</strong></figcaption></figure>`;
+        }
+
+        return `<figure class="gallery-slide placeholder${index===0 ? " active" : ""}"><div class="gallery-placeholder"><span>${title}</span><small>URL photo à ajouter</small></div><figcaption><strong>${title}</strong></figcaption></figure>`;
+      }).join("");
+
+      const thumbs = items.map((item,index) => {
+        const title = esc(item.title || ("Photo " + (index + 1)));
+        const url = imageUrl(item.url);
+
+        if(url){
+          return `<button class="gallery-thumb${index===0 ? " active" : ""}" type="button" data-index="${index}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer"></button>`;
+        }
+
+        return `<button class="gallery-thumb text-thumb${index===0 ? " active" : ""}" type="button" data-index="${index}"><span>${title}</span></button>`;
+      }).join("");
+
+      return `<div class="gallery-premium" data-gallery><div class="gallery-stage"><div class="gallery-slides">${slides}</div><button class="gallery-arrow prev" type="button" data-prev>‹</button><button class="gallery-arrow next" type="button" data-next>›</button><div class="gallery-counter" data-counter>1 / ${items.length}</div></div><div class="gallery-thumbs">${thumbs}</div></div>`;
+    }
+
+    function extraSectionHtml(d, sectionName){
+      const id = slug(sectionName);
+      const title = esc(sectionName);
+
+      if(slug(sectionName).includes("galerie")){
+        return `<section id="${esc(id)}" class="section"><h2>${title}</h2>${galleryHtml(d)}</section>`;
+      }
+
+      if(slug(sectionName).includes("tarif") || slug(sectionName).includes("devis")){
+        return `<section id="${esc(id)}" class="section"><h2>${title}</h2><div class="box"><h3>Prix et devis</h3><p>Les prix peuvent dépendre du terrain, de la distance, des matériaux et de l’urgence. Un devis clair doit être confirmé par le professionnel.</p><p><strong>Total estimatif DIGIY :</strong> ${esc(quoteTotalLabel(d))}</p></div></section>`;
+      }
+
+      return `<section id="${esc(id)}" class="section"><h2>${title}</h2><div class="box"><h3>${title}</h3><p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p></div></section>`;
+    }
+
+
+    function posDocumentPage(d){
+      const products = d.posProducts.length ? d.posProducts : [
+        "Drap 2 places | 15000","Serviette bain | 5000","Robe stylée | 18000","Fouta | 8000"
+      ];
+
+      const actions = d.posActions.length ? d.posActions : [
+        "Vendre","Ajouter au panier","Ajouter du stock","Faire remise","Encaisser","Stats","Ticket au choix"
+      ];
+
+      const phrases = d.posPhrases.length ? d.posPhrases : [
+        "robe stylée 1 à 18000","2 serviettes bain à 5000","fouta 3 à 8000","va aux stats"
+      ];
+
+      const aliases = d.posAliases.length ? d.posAliases : [
+        "robes = robe","serviettes = serviette","deux = 2","stat = stats"
+      ];
+
+      const productHtml = products.map(x => {
+        const parts = String(x).split("|");
+        const name = esc((parts[0] || "").trim());
+        const price = esc((parts[1] || "prix à compléter").trim());
+        return `<li><strong>${name}</strong><span>${price} FCFA</span></li>`;
+      }).join("");
+
+      const actionHtml = actions.map(x => `<li>${esc(x)}</li>`).join("");
+      const phraseHtml = phrases.map(x => `<li>“${esc(x)}”</li>`).join("");
+      const aliasHtml = aliases.map(x => `<li>${esc(x)}</li>`).join("");
 
       return `<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>${name} — DIGIY ${code}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Document logiciel POS — ${esc(d.projectName)}</title>
   <style>
-    :root{--bg:#071512;--line:rgba(255,255,255,.14);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#19c98a}
+    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.14);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784;--blue:#5fd4ff}
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}
     .wrap{max-width:1080px;margin:auto;padding:22px}
-    .hero{min-height:82vh;display:grid;align-items:center}
-    .card,.box{border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));box-shadow:0 24px 70px rgba(0,0,0,.32);padding:28px}
-    .kicker{color:#ffe7a8;font-weight:900;text-transform:uppercase;font-size:13px}
-    h1{font-size:clamp(42px,8vw,80px);line-height:.9;margin:12px 0;letter-spacing:-.06em}
-    h2{font-size:clamp(28px,5vw,46px);margin:0 0 14px}
-    p,li{color:var(--muted);line-height:1.6}
-    .btn{display:inline-flex;margin-top:14px;border-radius:999px;padding:13px 16px;background:var(--gold);color:#123226;text-decoration:none;font-weight:950}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-    .section{padding:28px 0}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}.hero{min-height:auto;padding-top:40px}.card,.box{padding:22px}}
+    .hero,.card{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}
+    .hero{margin:18px 0 18px}
+    .kicker{color:#ffe7a8;font-weight:950;text-transform:uppercase;font-size:13px;letter-spacing:.08em}
+    h1{font-size:clamp(34px,7vw,70px);line-height:.94;margin:12px 0;letter-spacing:-.055em}
+    h2{font-size:clamp(24px,4vw,40px);margin:0 0 14px}
+    h3{margin:0 0 10px}
+    p,li{line-height:1.55;color:var(--muted)}
+    .lead{font-size:18px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}
+    .card{box-shadow:none}
+    .full{grid-column:1/-1}
+    ul{padding-left:20px;margin:0}
+    .price-list{display:grid;gap:8px;padding:0;list-style:none}
+    .price-list li{display:flex;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:16px;padding:11px 13px;background:rgba(255,255,255,.045)}
+    .price-list strong{color:#fff}
+    .price-list span{color:#ffe7a8;font-weight:900}
+    .rule{border-left:4px solid var(--gold);padding-left:14px}
+    .badge{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:8px 11px;margin:4px 6px 4px 0;color:#ffe7a8;background:rgba(255,255,255,.045);font-weight:850}
+    footer{padding:26px 0;color:var(--muted);font-size:13px}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.hero,.card{padding:22px}}
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="hero">
-      <div class="card">
-        <div class="kicker">${terrain} · DIGIY ${code}</div>
-        <h1>${name}</h1>
-        <p>${goal}</p>
-        <p><strong>DIGIY :</strong> contact direct, 0% commission, paiement direct au professionnel.</p>
-        <a class="btn" href="#demande">Faire une demande</a>
-      </div>
+      <div class="kicker">Document logiciel · POS écoute métier · DIGIYLYFE</div>
+      <h1>${esc(d.projectName)}</h1>
+      <p class="lead">${esc(d.activity)}</p>
+      <p class="lead"><strong>Objectif :</strong> ${esc(d.goal)}</p>
+      <p class="lead"><strong>Terrain :</strong> ${esc(d.city)} · ${esc(d.audience)}</p>
     </section>
 
-    <section class="section">
-      <h2>Comprendre vite</h2>
-      <div class="grid">
-        <div class="box"><h3>Voir</h3><p>Le client voit l’offre, les photos, les informations utiles et les conditions.</p></div>
-        <div class="box"><h3>Choisir</h3><p>Le client comprend ce qui est disponible, possible ou à confirmer.</p></div>
-        <div class="box"><h3>Contacter</h3><p>Le contact reste direct avec le professionnel. DIGIY ne prend pas l’argent.</p></div>
-      </div>
+    <section class="grid">
+      <article class="card full">
+        <h2>Doctrine</h2>
+        <p class="rule">Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.</p>
+        <p>Ce document ne présente pas une vitrine. Il cadre le logiciel de caisse à recoudre dans <strong>caisse.html</strong>.</p>
+      </article>
+
+      <article class="card">
+        <h2>Marchandises de départ</h2>
+        <ul class="price-list">${productHtml}</ul>
+      </article>
+
+      <article class="card">
+        <h2>Actions métier</h2>
+        <ul>${actionHtml}</ul>
+      </article>
+
+      <article class="card">
+        <h2>Phrases d’entraînement</h2>
+        <ul>${phraseHtml}</ul>
+      </article>
+
+      <article class="card">
+        <h2>Corrections micro</h2>
+        <ul>${aliasHtml}</ul>
+      </article>
+
+      <article class="card full">
+        <h2>Parcours attendu</h2>
+        <p>${esc(d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.")}</p>
+        <div>
+          <span class="badge">Caisse au clic</span>
+          <span class="badge">Oreille métier discrète</span>
+          <span class="badge">Validation avant action</span>
+          <span class="badge">Stats après Encaisser</span>
+          <span class="badge">Ticket au choix</span>
+        </div>
+      </article>
+
+      <article class="card full">
+        <h2>Règles non négociables</h2>
+        <ul>
+          <li>La caisse doit marcher au clic même sans micro.</li>
+          <li>La voix ne doit jamais encaisser seule.</li>
+          <li>La voix prépare seulement un brouillon.</li>
+          <li>Le pro valide avant action.</li>
+          <li>Les stats se gardent uniquement après Encaisser.</li>
+          <li>Le ticket reste au choix, il ne sort pas automatiquement.</li>
+          <li>Mobile d’abord : gros boutons, peu d’écriture, lecture simple.</li>
+        </ul>
+      </article>
+
+      <article class="card full">
+        <h2>Tests terrain minimum</h2>
+        <ul>
+          <li>Dire ou écrire : fouta</li>
+          <li>Dire ou écrire : robe stylée 1 à 18000</li>
+          <li>Dire ou écrire : 2 serviettes bain à 5000</li>
+          <li>Dire ou écrire : ajoute 12 serviettes bain à 5000</li>
+          <li>Dire ou écrire : Awa doit 10000 pour robe stylée</li>
+          <li>Dire ou écrire : note couleur bleue taille M</li>
+          <li>Encaisser une vente, vérifier les stats, puis vérifier que le ticket reste au choix.</li>
+        </ul>
+      </article>
     </section>
 
-    <section class="section" id="demande">
-      <h2>Actions client</h2>
-      <div class="box">
-        <ul>${actions || "<li>Contacter directement</li>"}</ul>
-      </div>
-    </section>
-
-    <footer style="padding:30px 0;color:var(--muted);font-size:13px">
-      Prototype public généré par DIGIY Projet Maison · esquisse à finaliser.
-    </footer>
+    <footer>Document de cadrage logiciel POS · DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
 </body>
 </html>`;
     }
 
-    function proPrototype(d){
-      const code = esc(d.moduleCode);
-      const proName = esc(d.moduleProName);
-      const mission = esc(d.proGoal);
-      const gesture = esc(d.masterGesture);
-      const actions = d.proActions.slice(0,8).map(x => `<li>${esc(x)}</li>`).join("");
+
+    function firstPage(d){
+      if(d.typeKey === "pos") return posDocumentPage(d);
+
+      const name = esc(d.projectName);
+      const city = esc(d.city);
+      const style = esc(d.style);
+      const activity = esc(d.activity);
+      const goal = esc(d.goal);
+      const audience = esc(d.audience);
+      const action = esc(actionLabelByType(d));
+      const phoneText = esc(d.contactPhone || "WhatsApp à préciser");
+      const phoneDigits = waDigits(d.contactPhone);
+      const hours = esc(d.hours || "Horaires à préciser");
+      const address = esc(d.address || "Repère à préciser");
+      const nav = buildNav(d).map(x => `<a href="#${esc(x.id)}">${esc(x.label)}</a>`).join("");
+      const specials = (d.specialFeatures.length ? d.specialFeatures : ["Contact direct","Confiance","Informations pratiques"])
+        .slice(0,8)
+        .map(x => `<li>${esc(x)}</li>`)
+        .join("");
+
+      const extraSections = d.extraSections.slice(0,10).map(sectionName => extraSectionHtml(d, sectionName)).join("\n");
+
+      const quoteBlock = (d.typeKey === "service" || d.quoteWorkType || quoteTotal(d)) && d.typeKey !== "pos" ? `
+    <section id="predevis" class="section">
+      <h2>Pré-devis artisan</h2>
+      <div class="box quote">
+        <p><strong>Base estimative :</strong> ${esc(quoteTotalLabel(d))}</p>
+        <p><strong>Intervention :</strong> ${esc(d.quoteWorkType || "À préciser")}</p>
+        <p><strong>Surface / quantité :</strong> ${esc(d.quoteMeasure || "À préciser")}</p>
+        <p><strong>Délai :</strong> ${esc(d.quoteDelay || "À préciser")}</p>
+        <p class="warn">Ce montant est une base préparée par DIGIY. Le prix final doit être confirmé par l’artisan après vérification du terrain.</p>
+      </div>
+    </section>` : "";
 
       return `<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>${proName} — DIGIY ${code}</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>${name}</title>
   <style>
-    :root{--bg:#061b14;--line:rgba(255,255,255,.14);--text:#eafff1;--muted:rgba(234,255,241,.74);--gold:#facc15;--green:#22c55e;--blue:#38bdf8}
+    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784;--blue:#5fd4ff}
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top,rgba(250,204,21,.10),transparent 55%),linear-gradient(135deg,var(--bg),#0a2b1f);color:var(--text);padding:16px 16px 104px}
-    .wrap{max-width:1080px;margin:auto}
-    .card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(11,42,31,.94),rgba(6,35,25,.94));box-shadow:0 18px 55px rgba(0,0,0,.45);padding:18px;margin-bottom:14px}
-    h1{margin:0;font-size:clamp(28px,6vw,54px);line-height:1}
-    h2{margin:0 0 12px}
-    p,li{color:var(--muted);line-height:1.55}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-    .btn{min-height:58px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.18);color:var(--text);text-decoration:none;font-weight:950;display:grid;place-items:center;text-align:center;padding:10px}
-    .btn.primary{background:linear-gradient(135deg,var(--gold),var(--green));color:#062015;border:none}
-    .bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(6,27,20,.94);border-top:1px solid rgba(255,255,255,.10);padding:8px 10px}
-    .bottom-inner{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-    .bottom a{min-height:56px;border-radius:16px;display:grid;place-items:center;color:rgba(234,255,241,.70);text-decoration:none;font-size:11px;font-weight:950}
-    .bottom a.active{background:linear-gradient(135deg,var(--gold),var(--green));color:#062015}
-    @media(max-width:760px){.grid{grid-template-columns:1fr 1fr}}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}
+    a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0;scroll-margin-top:18px}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.warn{color:#fff1ba!important;border-top:1px solid var(--line);padding-top:12px}.gallery-premium{display:grid;gap:14px;margin:18px 0 28px}.gallery-stage{position:relative;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(255,255,255,.045);box-shadow:0 28px 80px rgba(0,0,0,.30)}.gallery-slides{position:relative;min-height:420px;touch-action:pan-y}.gallery-slide{display:none;position:relative;margin:0;background:rgba(6,20,16,.92)}.gallery-slide.active{display:block}.gallery-slide img{width:100%;height:clamp(420px,58vw,680px);display:block;object-fit:cover;background:#071512}.gallery-slide figcaption{position:absolute;left:18px;right:18px;bottom:18px;padding:12px 14px;border-radius:18px;background:linear-gradient(180deg,rgba(5,17,14,.08),rgba(5,17,14,.68));backdrop-filter:blur(6px)}.gallery-placeholder{display:grid;place-items:center;text-align:center;min-height:460px;padding:30px;color:#ffe7a8;background:rgba(245,199,107,.08)}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(4,18,14,.52);color:#fff4c8;font-size:30px;z-index:2}.gallery-arrow.prev{left:16px}.gallery-arrow.next{right:16px}.gallery-counter{position:absolute;top:16px;right:16px;padding:8px 12px;border-radius:999px;background:rgba(4,18,14,.55);border:1px solid rgba(255,255,255,.16);color:#fff4c8;font-weight:900;font-size:12px;z-index:2}.gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gallery-thumb{appearance:none;border:1px solid var(--line);padding:0;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.04);min-height:76px}.gallery-thumb img{width:100%;height:84px;object-fit:cover;display:block}.gallery-thumb.text-thumb{padding:12px;color:#ffe7a8;font-weight:900}.gallery-thumb.active{outline:2px solid rgba(245,199,107,.78);outline-offset:2px}footer{padding:30px 0;color:var(--muted);font-size:13px}
+    @media(max-width:760px){.grid,.info,.gallery-thumbs{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}.gallery-slides{min-height:320px}.gallery-slide img{height:clamp(320px,82vw,520px)}.gallery-thumbs{display:flex;overflow:auto;padding:4px 2px 6px}.gallery-thumb{min-width:92px}}
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="card">
-      <p style="color:#fde68a;font-weight:950;margin:0 0 8px">DIGIY ${code} · Espace pro</p>
-      <h1>${proName}</h1>
-      <p>${mission}</p>
-      <div class="grid">
-        <a class="btn primary" href="#">${gesture}</a>
-        <a class="btn" href="#">Activité</a>
-        <a class="btn" href="#">Notes</a>
-        <a class="btn" href="#">Plus</a>
+    <section id="accueil" class="hero">
+      <div class="card">
+        <div class="kicker">${city} · ${style}</div>
+        <h1 class="title">${name}</h1>
+        <p class="lead">${activity}</p>
+        <p class="lead">${goal}</p>
+        <p class="lead"><strong>Pour :</strong> ${audience}</p>
+        <div class="nav">${nav}</div>
+        <a class="btn" href="#demande">${action}</a>
       </div>
     </section>
 
-    <section class="card">
-      <h2>Actions terrain</h2>
-      <ul>${actions || "<li>Action principale à préciser</li>"}</ul>
+    <section id="offre" class="section">
+      <h2>${esc(sectionTitleByType(d))}</h2>
+      <p class="lead">Une première vitrine claire pour donner envie, rassurer et guider le client vers l’action.</p>
+      <div class="grid">
+        <div class="box"><h3>Offre principale</h3><p>Présente ici le service, produit ou plat le plus important.</p></div>
+        <div class="box"><h3>Contact direct</h3><p>Le client comprend vite comment appeler, écrire ou demander.</p></div>
+        <div class="box"><h3>Confiance</h3><p>Photos, avis, horaires et repères utiles.</p></div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Sécurité</h2>
-      <p>Prototype seulement. En production : PIN 8h, guard.js, routes propres, aucun téléphone privé visible, RLS Supabase.</p>
+    ${quoteBlock}
+    ${extraSections}
+
+    <section id="demande" class="section">
+      <h2>${action}</h2>
+      <div class="info">
+        <div class="box form">
+          <label>Nom</label>
+          <input id="clientName" placeholder="Votre nom">
+          <label>Téléphone</label>
+          <input id="clientPhone" placeholder="Votre WhatsApp">
+          <label>Message</label>
+          <textarea id="clientMessage" placeholder="Votre demande"></textarea>
+          <button id="sendRequest" type="button">Envoyer la demande sur WhatsApp</button>
+        </div>
+        <div class="box">
+          <h3>Informations pratiques</h3>
+          <p><strong>WhatsApp :</strong> ${phoneText}</p>
+          <p><strong>Horaires :</strong> ${hours}</p>
+          <p><strong>Repère :</strong> ${address}</p>
+          <p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p>
+        </div>
+      </div>
     </section>
+
+    <section id="contact" class="section">
+      <h2>Contact et besoins particuliers</h2>
+      <div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div>
+    </section>
+
+    <footer>Chaque partenaire est une facette. DIGIY lui donne la lumière.<br>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
 
-  <nav class="bottom">
-    <div class="bottom-inner">
-      <a class="active" href="#">Accueil</a>
-      <a href="#">Activité</a>
-      <a href="#">Action</a>
-      <a href="#">Notes</a>
-      <a href="#">Plus</a>
-    </div>
-  </nav>
+  ${'<scr'+'ipt>'}
+    (function(){
+      var phone='${js(phoneDigits)}';
+      var project='${js(d.projectName)}';
+
+      var send=document.getElementById('sendRequest');
+      if(send){
+        send.addEventListener('click',function(){
+          if(!phone){
+            alert('Ajoutez le WhatsApp officiel dans le générateur avant de publier cette page.');
+            return;
+          }
+          var nom=document.getElementById('clientName').value || '';
+          var tel=document.getElementById('clientPhone').value || '';
+          var msg=document.getElementById('clientMessage').value || '';
+          var text='Bonjour, je souhaite faire une demande pour '+project+'. Nom : '+nom+' / Téléphone : '+tel+' / Message : '+msg;
+          window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(text),'_blank');
+        });
+      }
+
+      function initGallery(gallery){
+        var slides=[].slice.call(gallery.querySelectorAll('.gallery-slide'));
+        var thumbs=[].slice.call(gallery.querySelectorAll('.gallery-thumb'));
+        var prev=gallery.querySelector('[data-prev]');
+        var next=gallery.querySelector('[data-next]');
+        var counter=gallery.querySelector('[data-counter]');
+        if(!slides.length) return;
+
+        var index=slides.findIndex(function(s){return s.classList.contains('active');});
+        if(index<0) index=0;
+
+        function show(i){
+          index=(i+slides.length)%slides.length;
+          slides.forEach(function(slide,idx){slide.classList.toggle('active',idx===index);});
+          thumbs.forEach(function(thumb,idx){thumb.classList.toggle('active',idx===index);});
+          if(counter) counter.textContent=(index+1)+' / '+slides.length;
+        }
+
+        if(prev) prev.addEventListener('click',function(){show(index-1);});
+        if(next) next.addEventListener('click',function(){show(index+1);});
+        thumbs.forEach(function(thumb,idx){thumb.addEventListener('click',function(){show(idx);});});
+
+        show(index);
+      }
+
+      document.querySelectorAll('[data-gallery]').forEach(initGallery);
+    })();
+  ${'</scr'+'ipt>'}
 </body>
 </html>`;
     }
 
-    function jsonOutput(d){
-      return JSON.stringify({
-        mode:"create_digiy_module",
-        doctrine:"Projet Maison dessine le module. DIGIY le sécurise. Le terrain le valide.",
-        module:d,
-        generated:{
-          brief:true,
-          map:true,
-          prompts:true,
-          sql:true,
-          security:true,
-          publicPrototype:true,
-          proPrototype:true
-        }
-      }, null, 2);
+
+    function posEcouteMetier(d){
+      const products = d.posProducts.length ? d.posProducts : ["Pain | 250","Café | 1000","Dentifrice | 1200","Savon | 500"];
+      const actions = d.posActions.length ? d.posActions : ["Vendre","Ajouter au panier","Ajouter du stock","Corriger quantité","Encaisser","Stats","Ticket au choix"];
+      const phrases = d.posPhrases.length ? d.posPhrases : ["dentifrice 2 à 1200","2 pains à 250","café","ajoute 12 savons à 500","va aux stats"];
+      const aliases = d.posAliases.length ? d.posAliases : ["pin = pain","pins = pains","deux = 2","dentifrices = dentifrice","cafe = café"];
+      const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute. Les stats se gardent après Encaisser. Le ticket reste au choix.";
+
+      return [
+        "# POS écoute métier — " + d.projectName,
+        "",
+        "## Doctrine",
+        "Le pro parle métier. DIGIY prépare l’action. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+        "",
+        "## Ce qu’on forme",
+        "1. Le langage du pro : phrases courtes, répétables, faciles à dire au comptoir.",
+        "2. Le langage de la caisse : règles, synonymes, corrections micro et actions à valider.",
+        "",
+        "## Marchandises prioritaires",
+        ...products.map(x => "- " + x),
+        "",
+        "## Actions métier POS",
+        ...actions.map(x => "- " + x),
+        "",
+        "## Phrases officielles d’entraînement",
+        ...phrases.map(x => "- “" + x + "”"),
+        "",
+        "## Corrections micro / synonymes",
+        ...aliases.map(x => "- " + x),
+        "",
+        "## Parcours action",
+        workflow,
+        "",
+        "## Grammaire caisse conseillée",
+        "- Marchandise seule : si elle existe déjà, quantité 1 avec le prix enregistré. Exemple : “fouta”.",
+        "- Marchandise + quantité + prix : vente rapide. Exemple : “robe stylée 1 à 18000”.",
+        "- Quantité + marchandise + prix : vente rapide. Exemple : “2 serviettes bain à 5000”.",
+        "- Ajoute + quantité + marchandise + prix : ajout / mise à jour stock. Exemple : “ajoute 12 serviettes bain à 5000”.",
+        "- Client + doit + montant + marchandise : dette cliente. Exemple : “Awa doit 10000 pour robe stylée”.",
+        "- Note + couleur + taille : note cliente. Exemple : “note couleur bleue taille M”.",
+        "- Chemin vocal : “va aux stats”, “ouvre les notes clientes”, “ouvre les marchandises”, “ouvre l’addition”.",
+        "",
+        "## Sécurité d’usage",
+        "- La voix ne doit jamais encaisser seule.",
+        "- La voix prépare un brouillon.",
+        "- Le pro valide avant action.",
+        "- Encaisser seulement après paiement réel.",
+        "- Ticket seulement si la cliente le demande.",
+        "",
+        "## Tests terrain minimum",
+        "1. Dire : fouta → si la marchandise existe déjà, panier quantité 1.",
+        "2. Dire : robe stylée 1 à 18000 → brouillon vente, puis validation.",
+        "3. Dire : 2 serviettes bain à 5000 → brouillon vente, puis validation.",
+        "4. Dire : ajoute 12 serviettes bain à 5000 → stock préparé.",
+        "5. Dire : Awa doit 10000 pour robe stylée → note dette cliente.",
+        "6. Dire : note couleur bleue taille M → note cliente.",
+        "7. Encaisser → stats mises à jour.",
+        "8. Vérifier que le ticket reste au choix.",
+        "",
+        "## Ce n’est pas une page web",
+        "Cette sortie sert à dégrossir le logiciel POS. Pour coder, utiliser l’onglet Prompt recouture POS. La Page HTML reste disponible seulement comme document de présentation, pas comme logiciel de caisse."
+      ].join("\n");
     }
+
+
+    function promptRecouturePOS(d){
+      const products = d.posProducts.length ? d.posProducts : ["Pain | 250","Café | 1000","Dentifrice | 1200","Savon | 500"];
+      const phrases = d.posPhrases.length ? d.posPhrases : ["dentifrice 2 à 1200","2 pains à 250","café","ajoute 12 savons à 500","va aux stats"];
+      const aliases = d.posAliases.length ? d.posAliases : ["pin = pain","pins = pains","deux = 2","dentifrices = dentifrice","cafe = café"];
+      const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.";
+
+      return [
+        "MISSION DE RECOUTURE — LOGICIEL POS DIGIY",
+        "",
+        "Important : ne pas créer une page web vitrine. Recoudre le logiciel de caisse existant.",
+        "Fichier cible conseillé : caisse.html",
+        "",
+        "Objectif :",
+        "Créer / améliorer une caisse POS mobile pour commerçant terrain.",
+        "La caisse doit fonctionner au clic, et l’oreille métier doit seulement aider à préparer les actions.",
+        "",
+        "Doctrine :",
+        "Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+        "",
+        "Marchandises de départ :",
+        ...products.map(x => "- " + x),
+        "",
+        "Phrases d'entraînement :",
+        ...phrases.map(x => "- " + x),
+        "",
+        "Corrections micro :",
+        ...aliases.map(x => "- " + x),
+        "",
+        "Parcours attendu :",
+        workflow,
+        "",
+        "Écrans / fonctions à garder :",
+        "- Caisse",
+        "- Marchandises / produits",
+        "- Recherche",
+        "- Panier",
+        "- Addition",
+        "- Paiement",
+        "- Encaisser",
+        "- Stats locales",
+        "- Notes clientes",
+        "- Ticket au choix",
+        "- Oreille métier discrète",
+        "",
+        "Règles non négociables :",
+        "- La voix ne doit jamais encaisser seule.",
+        "- La voix ne doit jamais supprimer une donnée seule.",
+        "- Toute action préparée par la voix doit être validée par le pro.",
+        "- La caisse doit rester utilisable sans micro.",
+        "- Les stats s’enregistrent seulement après Encaisser.",
+        "- Le ticket ne sort pas automatiquement.",
+        "- Priorité mobile : gros boutons, peu d’écriture, lecture simple.",
+        "",
+        "Sortie attendue du développeur / IA :",
+        "1. Modifier le fichier caisse.html existant.",
+        "2. Ne pas refaire toute l’interface si elle marche.",
+        "3. Ajouter ou améliorer l’oreille métier avec les règles ci-dessus.",
+        "4. Préserver localStorage pour l’autonomie téléphone.",
+        "5. Donner un fichier complet prêt à poser.",
+        "",
+        "Test final obligatoire :",
+        "- Dire ou écrire : fouta",
+        "- Dire ou écrire : robe stylée 1 à 18000",
+        "- Dire ou écrire : 2 serviettes bain à 5000",
+        "- Dire ou écrire : ajoute 12 serviettes bain à 5000",
+        "- Dire ou écrire : Awa doit 10000 pour robe stylée",
+        "- Encaisser une vente",
+        "- Vérifier stats",
+        "- Vérifier ticket au choix"
+      ].join("\n");
+    }
+
 
     function generateAll(){
       const d = data();
 
-      outputs.brief = briefModule(d);
-      outputs.map = cartography(d);
-      outputs.prompts = promptsByFile(d);
-      outputs.sql = sqlRpc(d);
-      outputs.security = securityDoc(d);
-      outputs.publicHtml = publicPrototype(d);
-      outputs.proHtml = proPrototype(d);
-      outputs.json = jsonOutput(d);
+      outputs.brief = brief(d);
+      outputs.prompt = promptIA(d);
+      outputs.sql = sql(d);
+      outputs.realisation = realisation(d);
+      outputs.devis = devisArtisan(d);
+      outputs.pos = posEcouteMetier(d);
+      outputs.codepos = promptRecouturePOS(d);
+      outputs.page = d.typeKey === "pos" ? posDocumentPage(d) : firstPage(d);
+      outputs.json = JSON.stringify(d,null,2);
 
-      currentTab = "brief";
+      currentTab = d.typeKey === "pos" ? "pos" : (d.typeKey === "service" || d.quoteWorkType || quoteTotal(d) ? "devis" : "page");
 
       document.querySelectorAll(".output-tabs button").forEach(b => {
         b.classList.toggle("active", b.dataset.tab === currentTab);
       });
 
       renderOutput();
-      setStatus("Esquisse module préparée pour : " + d.moduleCode + " · " + d.modulePublicName);
-      toast("Module esquissé");
+      setStatus("Dossier préparé pour : " + d.projectName);
+      toast("Projet préparé");
     }
 
-    function setOutputTab(tab){
-      currentTab = tab;
+    function setOutputTab(t){
+      currentTab = t;
       document.querySelectorAll(".output-tabs button").forEach(b => {
-        b.classList.toggle("active", b.dataset.tab === tab);
+        b.classList.toggle("active", b.dataset.tab === t);
       });
       renderOutput();
     }
@@ -1117,7 +2001,7 @@ Lecture publique seulement pour les logements publiés</textarea>
       const out = $("output");
       const empty = $("emptyState");
 
-      if(!text.trim()){
+      if(!text){
         out.hidden = true;
         out.style.display = "none";
         empty.hidden = false;
@@ -1142,12 +2026,12 @@ Lecture publique seulement pour les logements publiés</textarea>
       try{
         await navigator.clipboard.writeText(text);
       }catch(_){
-        const area = document.createElement("textarea");
-        area.value = text;
-        document.body.appendChild(area);
-        area.select();
+        const t = document.createElement("textarea");
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
         document.execCommand("copy");
-        area.remove();
+        t.remove();
       }
 
       toast("Sortie copiée");
@@ -1163,14 +2047,14 @@ Lecture publique seulement pour les logements publiés</textarea>
       const d = data();
       const ext =
         currentTab === "json" ? "json" :
-        currentTab === "publicHtml" || currentTab === "proHtml" ? "html" :
         currentTab === "sql" ? "sql" :
+        currentTab === "page" ? "html" :
         "md";
 
       const blob = new Blob([text],{type:"text/plain;charset=utf-8"});
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = moduleSlugName(d) + "_" + currentTab + "." + ext;
+      a.download = slug(d.projectName) + "_" + currentTab + "." + ext;
       document.body.appendChild(a);
       a.click();
       URL.revokeObjectURL(a.href);
@@ -1179,28 +2063,39 @@ Lecture publique seulement pour les logements publiés</textarea>
       toast("Téléchargement lancé");
     }
 
-    function moduleSlugName(d){
-      return slug(d.moduleCode + "-" + d.modulePublicName);
-    }
+    function previewPage(){
+      if((data().typeKey || "") === "pos"){
+        outputs.page = posDocumentPage(data());
+      }
 
-    function previewHtml(html){
-      if(!html.trim()){
-        toast("Prépare d’abord le module");
+      if(!outputs.page.trim()){
+        toast("Prépare d’abord le document");
         return;
       }
 
-      const blob = new Blob([html],{type:"text/html;charset=utf-8"});
+      const blob = new Blob([outputs.page],{type:"text/html;charset=utf-8"});
       const url = URL.createObjectURL(blob);
       window.open(url,"_blank");
       setTimeout(() => URL.revokeObjectURL(url),60000);
     }
 
-    function previewPublic(){
-      previewHtml(outputs.publicHtml || "");
-    }
+    function clearForm(){
+      [
+        "projectName","city","style","contactPhone","hours","address",
+        "activity","goal","audience","specialFeatures","extraSections","galleryPhotos",
+        "posProducts","posActions","posPhrases","posAliases","posWorkflow",
+        "quoteClient","quoteWorkType","quoteMeasure","quoteMaterials","quoteLabor",
+        "quoteMaterialCost","quoteTravel","quoteOther","quoteDelay","quoteDeposit",
+        "quoteValidity","quoteNotes"
+      ].forEach(id => {
+        const el = $(id);
+        if(el) el.value = "";
+      });
 
-    function previewPro(){
-      previewHtml(outputs.proHtml || "");
+      outputs.brief = outputs.prompt = outputs.sql = outputs.realisation = outputs.devis = outputs.pos = outputs.codepos = outputs.page = outputs.json = "";
+      renderOutput();
+      setStatus("Formulaire nettoyé.");
+      toast("Nettoyé");
     }
 
     function setStatus(text){
@@ -1215,57 +2110,22 @@ Lecture publique seulement pour les logements publiés</textarea>
       toastTimer = setTimeout(() => el.classList.remove("show"),1800);
     }
 
-    function clearForm(){
-      [
-        "moduleCode","modulePublicName","moduleProName","moduleTerrain","moduleMission",
-        "publicAudience","proAudience","publicGoal","proGoal","masterGesture",
-        "moneyBridge","publicPages","proPages","publicActions","proActions",
-        "securityRules","sqlNeeds","visualStyle"
-      ].forEach(id => {
-        const el = $(id);
-        if(el) el.value = "";
-      });
-
-      Object.keys(outputs).forEach(k => outputs[k] = "");
-      renderOutput();
-      setStatus("Formulaire nettoyé.");
-      toast("Nettoyé");
-    }
-
-    function loadLocExample(){
-      $("moduleCode").value = "LOC";
-      $("modulePublicName").value = "Je loue";
-      $("moduleProName").value = "Espace propriétaire";
-      $("moduleTerrain").value = "Saly, Sénégal · Petite Côte";
-      $("moduleMission").value = "Présenter des logements à louer côté public et donner au propriétaire un espace simple pour gérer disponibilités, réservations, prix, notes rapides et fiche publique.";
-      $("publicAudience").value = "Voyageurs, familles, diaspora, visiteurs de Saly, clients locaux, touristes, personnes qui cherchent un logement clair et direct.";
-      $("proAudience").value = "Propriétaires de logements, gestionnaires de chambres, maisons d’hôtes, petites locations et hébergements familiaux.";
-      $("publicGoal").value = "Voir les logements, regarder les photos, comprendre les prix, demander une disponibilité et contacter directement le propriétaire par WhatsApp.";
-      $("proGoal").value = "Gérer les réservations, bloquer des dates, modifier les prix, préparer la fiche publique, noter les dépenses et envoyer des traces vers Mon argent.";
-      $("masterGesture").value = "Bloquer une date";
-      $("moneyBridge").value = "Notes rapides : acompte, ménage, réparation, électricité, recette location → Mon argent";
-      $("publicPages").value = "index.html = galerie publique des logements\\nfiche.html = fiche logement\\ndemande.html = demande disponibilité / WhatsApp\\nvision.html = explication simple du module";
-      $("proPages").value = "index.html = entrée propriétaire\\npin.html = accès sécurisé\\ndashboard-pro.html = accueil propriétaire\\nreservations.html = réservations\\ndispos.html = calendrier disponibilités\\nnotes.html = notes rapides\\nprofile.html = fiche publique / prix / photos / plus\\nguard.js = session privée 8h";
-      $("publicActions").value = "Voir les logements\\nOuvrir une fiche\\nRegarder les photos\\nLire prix nuit semaine mois\\nDemander disponibilité\\nContacter par WhatsApp\\nComprendre 0% commission\\nPayer directement le propriétaire";
-      $("proActions").value = "Voir les arrivées du jour\\nBloquer une date\\nOuvrir une date\\nModifier prix\\nNoter acompte\\nNoter ménage\\nNoter réparation\\nEnvoyer vers Mon argent\\nModifier fiche publique\\nPartager QR";
-      $("securityRules").value = "Public = vitrine propre.\\nPro = coffre sécurisé.\\nAucun téléphone privé ni slug sensible visible en façade.\\nSession PIN 8h.\\nGuard par module.\\nSlug comme contexte interne.\\nLes logements cachés ne sortent pas en galerie publique.\\nLe paiement reste direct au propriétaire.\\nDIGIY ne garde pas l’argent.\\n0% commission.";
-      $("sqlNeeds").value = "Table logements publics visibles\\nTable réservations propriétaire\\nTable disponibilités / blocages\\nRPC galerie publique\\nRPC fiche publique par slug\\nRPC vérifier accès pro\\nRPC créer demande disponibilité\\nRLS stricte côté pro\\nLecture publique seulement pour les logements publiés";
-      $("visualStyle").value = "Mobile, premium simple, africain, chaleureux, confiance, photos grandes, boutons clairs";
-
-      setStatus("Exemple LOC chargé.");
-      toast("LOC chargé");
-    }
-
     window.generateAll = generateAll;
     window.setOutputTab = setOutputTab;
     window.copyCurrent = copyCurrent;
     window.downloadCurrent = downloadCurrent;
-    window.previewPublic = previewPublic;
-    window.previewPro = previewPro;
+    window.previewPage = previewPage;
     window.clearForm = clearForm;
-    window.loadLocExample = loadLocExample;
+    window.applyTypeDefaults = applyTypeDefaults;
+    window.setServiceQuoteExample = setServiceQuoteExample;
 
-    renderOutput();
+    applyTypeDefaults(false);
+    setStatus('V19 POS document verrouillé · prêt à préparer le cahier logiciel.');
   </script>
 </body>
 </html>
+
+
+
+
+
