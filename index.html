@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIGIY Projet Maison Builder — V20 Profils métier POS</title>
+  <title>DIGIY Projet Maison Builder — V22 Profils métier POS stable</title>
 
   <style>
     :root{
@@ -430,7 +430,7 @@
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Outil maison · BY DIGIYLYFE · V20</div>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V22</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">
           Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
@@ -1317,12 +1317,12 @@ Linge de maison |</textarea>
         return [
           "-- POS DIGIY — Mémo technique léger V20",
           "-- Pas de SQL obligatoire pour la première version terrain.",
-          "-- La caisse doit rester autonome sur téléphone avec localStorage.
--- Le moule POS reste universel ; les profils métier changent le vocabulaire et les exemples.",
+          "-- La caisse doit rester autonome sur téléphone avec localStorage.",
+          "-- Le moule POS reste universel ; les profils métier changent le vocabulaire et les exemples.",
           "",
           "-- Données locales à prévoir :",
-          "-- caisse_profile : nom du profil, libellés métier, synonymes, phrases d'entraînement
--- caisse_prods : produits/marchandises, prix, stock, catégorie, couleur, taille si besoin",
+          "-- caisse_profile : nom du profil, libellés métier, synonymes, phrases d'entraînement",
+          "-- caisse_prods : produits/marchandises, prix, stock, catégorie, couleur, taille si besoin",
           "-- caisse_ventes : ventes encaissées, lignes, total, paiement, date",
           "-- caisse_notes : dettes clientes, commandes, couleurs, tailles, demandes",
           "",
@@ -1362,12 +1362,12 @@ Linge de maison |</textarea>
           "## 1. Ne pas générer une vitrine",
           "- Le mode POS sert à cadrer un logiciel de caisse.",
           "- La page HTML reste secondaire.",
-          "- Le fichier cible réel sera caisse.html.
-- Le fichier caisse.html doit rester universel ; le textile devient un profil métier.",
+          "- Le fichier cible réel sera caisse.html.",
+          "- Le fichier caisse.html doit rester universel ; le textile devient un profil métier.",
           "",
           "## 2. Cœur logiciel",
-          "- Moteur universel : produits/marchandises, prix, stock, panier, addition, paiement, stats.
-- Profil métier : libellés, exemples, synonymes, produits de départ, taille/couleur si utile.",
+          "- Moteur universel : produits/marchandises, prix, stock, panier, addition, paiement, stats.",
+          "- Profil métier : libellés, exemples, synonymes, produits de départ, taille/couleur si utile.",
           "- Panier rapide.",
           "- Addition claire.",
           "- Paiement choisi.",
@@ -2196,10 +2196,14 @@ Linge de maison |</textarea>
     window.setServiceQuoteExample = setServiceQuoteExample;
 
     applyTypeDefaults(false);
-    setStatus('V20 Profil métier POS · moule universel protégé.');
+    setStatus('V22 Profil métier POS stable · JavaScript vérifié.');
   </script>
 </body>
 </html>
+
+
+
+
 
 
 
