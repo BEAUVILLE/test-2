@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIGIY Projet Maison Builder — V19 POS document verrouillé</title>
+  <title>DIGIY Projet Maison Builder — V20 Profils métier POS</title>
 
   <style>
     :root{
@@ -430,7 +430,7 @@
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Outil maison · BY DIGIYLYFE · V19</div>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V20</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">
           Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
@@ -751,15 +751,15 @@ Linge de maison |</textarea>
           <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
           <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
           <button type="button" class="devis-tab" data-tab="devis" onclick="setOutputTab('devis')">Pré-devis artisan</button>
-          <button type="button" data-tab="pos" onclick="setOutputTab('pos')">Cahier logiciel POS</button>
-          <button type="button" data-tab="codepos" onclick="setOutputTab('codepos')">Prompt recouture POS</button>
-          <button type="button" data-tab="page" onclick="setOutputTab('page')">Document logiciel POS</button>
+          <button type="button" data-tab="pos" onclick="setOutputTab('pos')">Profil métier POS</button>
+          <button type="button" data-tab="codepos" onclick="setOutputTab('codepos')">Prompt moule POS</button>
+          <button type="button" data-tab="page" onclick="setOutputTab('page')">Document profil POS</button>
           <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
         <div class="output-actions">
           <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
           <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
-          <button class="btn" type="button" onclick="previewPage()">Prévisualiser le document POS</button>
+          <button class="btn" type="button" onclick="previewPage()">Prévisualiser le profil POS</button>
         </div>
       </div>
 
@@ -1217,12 +1217,12 @@ Linge de maison |</textarea>
         ];
 
         return [
-          "Tu es un assistant de recouture de logiciel POS DIGIYLYFE.",
+          "Tu es un assistant de recouture de logiciel POS DIGIYLYFE avec architecture de profils métier.",
           "Tu ne dois pas créer une page web vitrine.",
-          "Tu dois améliorer le logiciel de caisse existant, fichier cible conseillé : caisse.html.",
+          "Tu dois améliorer le logiciel de caisse existant, fichier cible conseillé : caisse.html, sans le spécialiser pour un seul métier.",
           "",
           "Projet : " + d.projectName,
-          "Type : logiciel POS métier",
+          "Type : profil métier POS + moule universel",
           "Zone : " + d.city,
           "Style : " + d.style,
           "Activité : " + d.activity,
@@ -1230,12 +1230,26 @@ Linge de maison |</textarea>
           "Public : " + d.audience,
           "",
           "Doctrine :",
-          "Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+          "Le moule reste universel. Le métier habille le moule. Le pro garde sa vérité.",
           "",
-          "Marchandises prioritaires :",
+          "Moule POS à préserver :",
+          "- Caisse",
+          "- Produits / marchandises",
+          "- Recherche",
+          "- Stock",
+          "- Panier",
+          "- Addition",
+          "- Paiement",
+          "- Encaisser",
+          "- Stats locales",
+          "- Notes",
+          "- Ticket au choix",
+          "- Oreille métier discrète",
+          "",
+          "Profil métier exemple :",
           ...products.map(x => "- " + x),
           "",
-          "Actions métier à gérer :",
+          "Actions métier utiles pour ce profil :",
           ...actions.map(x => "- " + x),
           "",
           "Phrases officielles d'entraînement :",
@@ -1247,20 +1261,8 @@ Linge de maison |</textarea>
           "Parcours attendu :",
           d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.",
           "",
-          "Écrans et fonctions à préserver :",
-          "- Caisse",
-          "- Marchandises / produits",
-          "- Recherche",
-          "- Panier",
-          "- Addition",
-          "- Paiement",
-          "- Encaisser",
-          "- Stats locales",
-          "- Notes clientes",
-          "- Ticket au choix",
-          "- Oreille métier discrète",
-          "",
           "Règles non négociables :",
+          "- Ne pas hardcoder uniquement le textile dans le moteur.",
           "- La caisse doit marcher au clic même sans micro.",
           "- La voix ne doit jamais encaisser seule.",
           "- La voix prépare seulement un brouillon.",
@@ -1271,7 +1273,7 @@ Linge de maison |</textarea>
           "- Mobile d’abord : gros boutons, peu d’écriture, lecture simple.",
           "",
           "Sortie attendue :",
-          "Recoudre le fichier caisse.html complet, prêt à poser, sans refaire toute l’interface si elle marche déjà."
+          "Recoudre le fichier caisse.html complet, prêt à poser, avec un moule universel et un profil métier exemple, sans refaire toute l’interface si elle marche déjà."
         ].join("\n");
       }
 
@@ -1313,12 +1315,14 @@ Linge de maison |</textarea>
     function sql(d){
       if(d.typeKey === "pos"){
         return [
-          "-- POS DIGIY — Mémo technique léger",
+          "-- POS DIGIY — Mémo technique léger V20",
           "-- Pas de SQL obligatoire pour la première version terrain.",
-          "-- La caisse doit rester autonome sur téléphone avec localStorage.",
+          "-- La caisse doit rester autonome sur téléphone avec localStorage.
+-- Le moule POS reste universel ; les profils métier changent le vocabulaire et les exemples.",
           "",
           "-- Données locales à prévoir :",
-          "-- caisse_prods : marchandises, prix, stock, catégorie, couleur, taille si besoin",
+          "-- caisse_profile : nom du profil, libellés métier, synonymes, phrases d'entraînement
+-- caisse_prods : produits/marchandises, prix, stock, catégorie, couleur, taille si besoin",
           "-- caisse_ventes : ventes encaissées, lignes, total, paiement, date",
           "-- caisse_notes : dettes clientes, commandes, couleurs, tailles, demandes",
           "",
@@ -1353,15 +1357,17 @@ Linge de maison |</textarea>
     function realisation(d){
       if(d.typeKey === "pos"){
         return [
-          "# Plan de réalisation logiciel POS — " + d.projectName,
+          "# Plan de réalisation POS universel + profil métier — " + d.projectName,
           "",
           "## 1. Ne pas générer une vitrine",
           "- Le mode POS sert à cadrer un logiciel de caisse.",
           "- La page HTML reste secondaire.",
-          "- Le fichier cible réel sera caisse.html.",
+          "- Le fichier cible réel sera caisse.html.
+- Le fichier caisse.html doit rester universel ; le textile devient un profil métier.",
           "",
           "## 2. Cœur logiciel",
-          "- Marchandises propres : nom, prix, stock, modèle, taille/couleur si utile.",
+          "- Moteur universel : produits/marchandises, prix, stock, panier, addition, paiement, stats.
+- Profil métier : libellés, exemples, synonymes, produits de départ, taille/couleur si utile.",
           "- Panier rapide.",
           "- Addition claire.",
           "- Paiement choisi.",
@@ -1557,7 +1563,7 @@ Linge de maison |</textarea>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Document logiciel POS — ${esc(d.projectName)}</title>
+  <title>Profil métier POS — ${esc(d.projectName)}</title>
   <style>
     :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.14);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784;--blue:#5fd4ff}
     *{box-sizing:border-box}
@@ -1588,7 +1594,7 @@ Linge de maison |</textarea>
 <body>
   <main class="wrap">
     <section class="hero">
-      <div class="kicker">Document logiciel · POS écoute métier · DIGIYLYFE</div>
+      <div class="kicker">Profil métier · POS universel · DIGIYLYFE</div>
       <h1>${esc(d.projectName)}</h1>
       <p class="lead">${esc(d.activity)}</p>
       <p class="lead"><strong>Objectif :</strong> ${esc(d.goal)}</p>
@@ -1596,10 +1602,17 @@ Linge de maison |</textarea>
     </section>
 
     <section class="grid">
+
+      <article class="card full">
+        <h2>Architecture V20</h2>
+        <p class="rule">caisse.html = moteur universel. POS_PROFILE = vocabulaire métier, exemples, synonymes et données de départ.</p>
+        <p>Le textile est ici un profil exemple. Demain, le même moule peut charger épicerie, cosmétique, restaurant, quincaillerie ou salon beauté.</p>
+      </article>
+
       <article class="card full">
         <h2>Doctrine</h2>
         <p class="rule">Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.</p>
-        <p>Ce document ne présente pas une vitrine. Il cadre le logiciel de caisse à recoudre dans <strong>caisse.html</strong>.</p>
+        <p>Ce document ne présente pas une vitrine et ne spécialise pas le moule. Il décrit un <strong>profil métier</strong> à brancher sur le moteur universel <strong>caisse.html</strong>.</p>
       </article>
 
       <article class="card">
@@ -1661,7 +1674,7 @@ Linge de maison |</textarea>
       </article>
     </section>
 
-    <footer>Document de cadrage logiciel POS · DIGIY Projet Maison · BY DIGIYLYFE</footer>
+    <footer>Profil métier POS · Moule universel protégé · DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
 </body>
 </html>`;
@@ -1828,114 +1841,176 @@ Linge de maison |</textarea>
 
 
     function posEcouteMetier(d){
-      const products = d.posProducts.length ? d.posProducts : ["Pain | 250","Café | 1000","Dentifrice | 1200","Savon | 500"];
-      const actions = d.posActions.length ? d.posActions : ["Vendre","Ajouter au panier","Ajouter du stock","Corriger quantité","Encaisser","Stats","Ticket au choix"];
-      const phrases = d.posPhrases.length ? d.posPhrases : ["dentifrice 2 à 1200","2 pains à 250","café","ajoute 12 savons à 500","va aux stats"];
-      const aliases = d.posAliases.length ? d.posAliases : ["pin = pain","pins = pains","deux = 2","dentifrices = dentifrice","cafe = café"];
-      const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute. Les stats se gardent après Encaisser. Le ticket reste au choix.";
+      const products = d.posProducts.length ? d.posProducts : [
+        "Drap 2 places | 15000","Serviette bain | 5000","Robe stylée | 18000","Fouta | 8000"
+      ];
+
+      const actions = d.posActions.length ? d.posActions : [
+        "Vendre","Ajouter au panier","Ajouter du stock","Faire remise","Encaisser","Stats","Ticket au choix"
+      ];
+
+      const phrases = d.posPhrases.length ? d.posPhrases : [
+        "robe stylée 1 à 18000","2 serviettes bain à 5000","fouta 3 à 8000","va aux stats"
+      ];
+
+      const aliases = d.posAliases.length ? d.posAliases : [
+        "robes = robe","serviettes = serviette","deux = 2","stat = stats"
+      ];
+
+      const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.";
 
       return [
-        "# POS écoute métier — " + d.projectName,
+        "# Profil métier POS — " + d.projectName,
         "",
-        "## Doctrine",
-        "Le pro parle métier. DIGIY prépare l’action. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+        "## Doctrine V20",
+        "Le moule POS reste universel. Le profil métier habille le moule sans le casser.",
+        "",
+        "La caisse générique garde ses fonctions : produits/marchandises, stock, panier, addition, paiement, encaissement, stats, notes et ticket au choix.",
+        "Le profil métier apporte seulement : vocabulaire, exemples, synonymes, marchandises de départ et règles d’écoute.",
         "",
         "## Ce qu’on forme",
-        "1. Le langage du pro : phrases courtes, répétables, faciles à dire au comptoir.",
-        "2. Le langage de la caisse : règles, synonymes, corrections micro et actions à valider.",
+        "1. Le langage du pro : phrases courtes, répétables, adaptées à son métier.",
+        "2. Le langage de la caisse : règles et synonymes chargés depuis le profil.",
+        "3. Le moule POS : il ne doit jamais être figé sur un seul commerce.",
         "",
-        "## Marchandises prioritaires",
+        "## Profil métier actuel",
+        "- Nom du profil : " + d.projectName,
+        "- Terrain : " + d.city,
+        "- Vocabulaire principal : marchandises / stock / tailles / couleurs / notes clientes",
+        "",
+        "## Marchandises de départ du profil",
         ...products.map(x => "- " + x),
         "",
-        "## Actions métier POS",
+        "## Actions métier utiles pour ce profil",
         ...actions.map(x => "- " + x),
         "",
         "## Phrases officielles d’entraînement",
         ...phrases.map(x => "- “" + x + "”"),
         "",
-        "## Corrections micro / synonymes",
+        "## Corrections micro / synonymes du profil",
         ...aliases.map(x => "- " + x),
         "",
         "## Parcours action",
         workflow,
         "",
-        "## Grammaire caisse conseillée",
-        "- Marchandise seule : si elle existe déjà, quantité 1 avec le prix enregistré. Exemple : “fouta”.",
-        "- Marchandise + quantité + prix : vente rapide. Exemple : “robe stylée 1 à 18000”.",
-        "- Quantité + marchandise + prix : vente rapide. Exemple : “2 serviettes bain à 5000”.",
-        "- Ajoute + quantité + marchandise + prix : ajout / mise à jour stock. Exemple : “ajoute 12 serviettes bain à 5000”.",
-        "- Client + doit + montant + marchandise : dette cliente. Exemple : “Awa doit 10000 pour robe stylée”.",
-        "- Note + couleur + taille : note cliente. Exemple : “note couleur bleue taille M”.",
-        "- Chemin vocal : “va aux stats”, “ouvre les notes clientes”, “ouvre les marchandises”, “ouvre l’addition”.",
+        "## Architecture conseillée",
+        "- caisse.html = moteur universel POS.",
+        "- POS_PROFILE = profil métier chargé par la caisse.",
+        "- Le profil peut être textile, épicerie, cosmétique, quincaillerie, restaurant, salon beauté, etc.",
+        "- Le moteur ne doit jamais contenir en dur uniquement le vocabulaire textile.",
         "",
-        "## Sécurité d’usage",
+        "## Exemple de structure POS_PROFILE",
+        "const POS_PROFILE = {",
+        "  profileName: " + JSON.stringify(d.projectName) + ",",
+        "  productLabel: 'Marchandise',",
+        "  customerLabel: 'Cliente',",
+        "  starterProducts: [",
+        ...products.map(x => "    " + JSON.stringify(x) + ","),
+        "  ],",
+        "  trainingPhrases: [",
+        ...phrases.map(x => "    " + JSON.stringify(x) + ","),
+        "  ],",
+        "  aliases: [",
+        ...aliases.map(x => "    " + JSON.stringify(x) + ","),
+        "  ]",
+        "};",
+        "",
+        "## Règles non négociables",
+        "- Ne pas spécialiser caisse.html en caisse textile uniquement.",
         "- La voix ne doit jamais encaisser seule.",
         "- La voix prépare un brouillon.",
         "- Le pro valide avant action.",
-        "- Encaisser seulement après paiement réel.",
-        "- Ticket seulement si la cliente le demande.",
+        "- Les stats se gardent uniquement après Encaisser.",
+        "- Le ticket reste au choix.",
+        "- Le clic reste prioritaire si le micro ne comprend pas.",
         "",
         "## Tests terrain minimum",
-        "1. Dire : fouta → si la marchandise existe déjà, panier quantité 1.",
-        "2. Dire : robe stylée 1 à 18000 → brouillon vente, puis validation.",
-        "3. Dire : 2 serviettes bain à 5000 → brouillon vente, puis validation.",
-        "4. Dire : ajoute 12 serviettes bain à 5000 → stock préparé.",
-        "5. Dire : Awa doit 10000 pour robe stylée → note dette cliente.",
-        "6. Dire : note couleur bleue taille M → note cliente.",
-        "7. Encaisser → stats mises à jour.",
-        "8. Vérifier que le ticket reste au choix.",
+        "1. Charger ce profil métier.",
+        "2. Vérifier que les marchandises de départ apparaissent.",
+        "3. Tester une phrase d’entraînement.",
+        "4. Tester une correction micro.",
+        "5. Encaisser une vente.",
+        "6. Vérifier stats et ticket au choix.",
         "",
-        "## Ce n’est pas une page web",
-        "Cette sortie sert à dégrossir le logiciel POS. Pour coder, utiliser l’onglet Prompt recouture POS. La Page HTML reste disponible seulement comme document de présentation, pas comme logiciel de caisse."
+        "## Ce n’est pas une caisse sur mesure",
+        "Cette sortie ne transforme pas le moule en caisse textile. Elle prépare un profil métier textile que le moule POS universel peut charger."
       ].join("\n");
     }
 
 
     function promptRecouturePOS(d){
-      const products = d.posProducts.length ? d.posProducts : ["Pain | 250","Café | 1000","Dentifrice | 1200","Savon | 500"];
-      const phrases = d.posPhrases.length ? d.posPhrases : ["dentifrice 2 à 1200","2 pains à 250","café","ajoute 12 savons à 500","va aux stats"];
-      const aliases = d.posAliases.length ? d.posAliases : ["pin = pain","pins = pains","deux = 2","dentifrices = dentifrice","cafe = café"];
+      const products = d.posProducts.length ? d.posProducts : [
+        "Drap 2 places | 15000","Serviette bain | 5000","Robe stylée | 18000","Fouta | 8000"
+      ];
+
+      const phrases = d.posPhrases.length ? d.posPhrases : [
+        "robe stylée 1 à 18000","2 serviettes bain à 5000","fouta 3 à 8000","va aux stats"
+      ];
+
+      const aliases = d.posAliases.length ? d.posAliases : [
+        "robes = robe","serviettes = serviette","deux = 2","stat = stats"
+      ];
+
       const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.";
 
       return [
-        "MISSION DE RECOUTURE — LOGICIEL POS DIGIY",
+        "MISSION V20 — MOULE POS UNIVERSEL + PROFIL MÉTIER",
         "",
-        "Important : ne pas créer une page web vitrine. Recoudre le logiciel de caisse existant.",
+        "Important : ne pas créer une page web vitrine.",
+        "Important : ne pas spécialiser caisse.html pour un seul commerce.",
+        "Le fichier caisse.html doit rester un moteur universel POS.",
+        "",
         "Fichier cible conseillé : caisse.html",
         "",
         "Objectif :",
-        "Créer / améliorer une caisse POS mobile pour commerçant terrain.",
-        "La caisse doit fonctionner au clic, et l’oreille métier doit seulement aider à préparer les actions.",
+        "Ajouter une architecture de profil métier au logiciel POS.",
+        "Le moule garde ses fonctions génériques : produits/marchandises, stock, panier, addition, paiement, encaissement, stats, notes, ticket au choix.",
+        "Le profil métier apporte seulement le vocabulaire, les exemples, les synonymes, les marchandises de départ et les règles d’écoute.",
         "",
         "Doctrine :",
-        "Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+        "Le moule reste universel. Le métier habille le moule. Le pro garde sa vérité.",
         "",
-        "Marchandises de départ :",
+        "Profil métier exemple : " + d.projectName,
+        "Zone : " + d.city,
+        "Style : " + d.style,
+        "",
+        "Marchandises / produits de départ du profil :",
         ...products.map(x => "- " + x),
         "",
-        "Phrases d'entraînement :",
+        "Phrases d'entraînement du profil :",
         ...phrases.map(x => "- " + x),
         "",
-        "Corrections micro :",
+        "Corrections micro du profil :",
         ...aliases.map(x => "- " + x),
         "",
         "Parcours attendu :",
         workflow,
         "",
-        "Écrans / fonctions à garder :",
-        "- Caisse",
-        "- Marchandises / produits",
-        "- Recherche",
-        "- Panier",
-        "- Addition",
-        "- Paiement",
-        "- Encaisser",
-        "- Stats locales",
-        "- Notes clientes",
-        "- Ticket au choix",
-        "- Oreille métier discrète",
+        "À créer ou améliorer dans caisse.html :",
+        "- Un objet POS_PROFILE ou une zone de configuration métier.",
+        "- Un mécanisme simple pour charger les produits/marchandises de départ.",
+        "- Une oreille métier qui lit les synonymes du profil.",
+        "- Des libellés adaptables : Produit / Marchandise / Cliente / Client selon profil.",
+        "- Une caisse qui reste utilisable au clic sans dépendre de la voix.",
+        "",
+        "Exemple attendu :",
+        "const POS_PROFILE = {",
+        "  profileName: " + JSON.stringify(d.projectName) + ",",
+        "  productLabel: 'Marchandise',",
+        "  customerLabel: 'Cliente',",
+        "  starterProducts: [",
+        ...products.map(x => "    " + JSON.stringify(x) + ","),
+        "  ],",
+        "  trainingPhrases: [",
+        ...phrases.map(x => "    " + JSON.stringify(x) + ","),
+        "  ],",
+        "  aliases: [",
+        ...aliases.map(x => "    " + JSON.stringify(x) + ","),
+        "  ]",
+        "};",
         "",
         "Règles non négociables :",
+        "- Ne pas hardcoder uniquement le textile dans toute la caisse.",
         "- La voix ne doit jamais encaisser seule.",
         "- La voix ne doit jamais supprimer une donnée seule.",
         "- Toute action préparée par la voix doit être validée par le pro.",
@@ -1946,20 +2021,21 @@ Linge de maison |</textarea>
         "",
         "Sortie attendue du développeur / IA :",
         "1. Modifier le fichier caisse.html existant.",
-        "2. Ne pas refaire toute l’interface si elle marche.",
-        "3. Ajouter ou améliorer l’oreille métier avec les règles ci-dessus.",
-        "4. Préserver localStorage pour l’autonomie téléphone.",
+        "2. Préserver le moule universel.",
+        "3. Ajouter un profil métier exemple textile.",
+        "4. Ne pas refaire toute l’interface si elle marche.",
         "5. Donner un fichier complet prêt à poser.",
         "",
         "Test final obligatoire :",
-        "- Dire ou écrire : fouta",
-        "- Dire ou écrire : robe stylée 1 à 18000",
-        "- Dire ou écrire : 2 serviettes bain à 5000",
-        "- Dire ou écrire : ajoute 12 serviettes bain à 5000",
-        "- Dire ou écrire : Awa doit 10000 pour robe stylée",
-        "- Encaisser une vente",
-        "- Vérifier stats",
-        "- Vérifier ticket au choix"
+        "- Charger le profil textile.",
+        "- Dire ou écrire : fouta.",
+        "- Dire ou écrire : robe stylée 1 à 18000.",
+        "- Dire ou écrire : 2 serviettes bain à 5000.",
+        "- Dire ou écrire : ajoute 12 serviettes bain à 5000.",
+        "- Dire ou écrire : Awa doit 10000 pour robe stylée.",
+        "- Encaisser une vente.",
+        "- Vérifier stats.",
+        "- Vérifier ticket au choix."
       ].join("\n");
     }
 
@@ -2120,10 +2196,14 @@ Linge de maison |</textarea>
     window.setServiceQuoteExample = setServiceQuoteExample;
 
     applyTypeDefaults(false);
-    setStatus('V19 POS document verrouillé · prêt à préparer le cahier logiciel.');
+    setStatus('V20 Profil métier POS · moule universel protégé.');
   </script>
 </body>
 </html>
+
+
+
+
 
 
 
